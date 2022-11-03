@@ -1,7 +1,7 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity('specialities')
-class Specialities{
+@Entity('specialties')
+class Specialties{
 
     @PrimaryGeneratedColumn('increment')
     id: string
@@ -11,4 +11,4 @@ class Specialities{
 
 }
 
-export default Specialities
+export default Specialties

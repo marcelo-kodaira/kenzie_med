@@ -2,7 +2,7 @@ import { Exclude } from "class-transformer";
 import { Column, CreateDateColumn, Entity, JoinColumn,    OneToMany,    OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import Addresses from "./address.entity";
 import Schedules from "./schedule.entity";
-import Specialities from "./speciality.entity";
+import Specialties from "./specialty.entity";
 
 @Entity('doctors')
 class Doctors{
@@ -35,9 +35,9 @@ class Doctors{
     @Column({default: true})
     isActive: boolean
 
-    @OneToOne(()=> Specialities)
+    @OneToOne(()=> Specialties)
     @JoinColumn()
-    specialities: Specialities
+    specialties: Specialties
 
     @OneToOne(()=> Addresses)
     @JoinColumn()

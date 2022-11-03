@@ -14,7 +14,7 @@ class Addresses{
     @Column()
     number: string
 
-    @Column()
+    @Column({length: 2})
     state: string
 
     @Column()
