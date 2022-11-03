@@ -1,4 +1,4 @@
-import { IAddressRequest } from "../address"
+import { IAddressRequest, IAddressUpdate } from "../address"
 
 export interface IUserRequest {
     name: string
@@ -19,6 +19,7 @@ export interface IUser {
     CPF: string
     sex: string
     isAdmin: boolean
+    isActive: boolean
     createdAt: Date
     updatedAt: Date
     Address: IAddressRequest
@@ -29,9 +30,6 @@ export interface IUserUpdate {
     email?: string
     password?: string
     age?: number
-    CPF?: string
     sex?: string
-    isAdmin?: boolean
-    isActive?: boolean
-    Address?: IAddressRequest
+    Address?: IAddressUpdate
 }

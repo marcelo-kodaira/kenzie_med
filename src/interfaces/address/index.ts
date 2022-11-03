@@ -6,3 +6,11 @@ export interface IAddressRequest {
     state: string
 }
 
+export interface IAddressUpdate{
+    city?: string
+    state?: string
+    district?: string
+    number?: number
+    zipCode?: string
+}
+
