@@ -3,8 +3,15 @@ import jwt from "jsonwebtoken";
 import "dotenv/config";
 import AppError from "../Error/AppError";
 
-const autMiddleware = (req: Request, res: Response, next: NextFunction) => {
+const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers.authorization?.split(" ")[1];
+
+  if (!token) {
+		return res.status(401).json({
+			message: "Missing authorization headers"
+		});
+	}
+
   jwt.verify(
     token as string,
     process.env.SECRET_KEY as string,
@@ -20,4 +27,4 @@ const autMiddleware = (req: Request, res: Response, next: NextFunction) => {
   );
 };
 
-export default autMiddleware;
+export default authMiddleware;
