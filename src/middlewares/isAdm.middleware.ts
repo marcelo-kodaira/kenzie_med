@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { AppError } from "../Error/AppError";
+import AppError from "../error/AppError";
 
 const isAdmMiddleware = (req: Request, res: Response, next: NextFunction) => {
   if (req.user.isAdm) {
