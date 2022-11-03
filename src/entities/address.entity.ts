@@ -15,6 +15,9 @@ class Addresses{
     number: string
 
     @Column()
+    state: string
+
+    @Column()
     city: string
 
 }

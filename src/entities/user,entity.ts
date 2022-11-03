@@ -1,4 +1,5 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Exclude } from "class-transformer";
 import Addresses from "./address.entity";
 import Schedules from "./schedule.entity";
 
@@ -14,6 +15,7 @@ class Users{
     email: string
 
     @Column()
+    @Exclude()
     password: string
 
     @Column({length: 11, unique: true})
