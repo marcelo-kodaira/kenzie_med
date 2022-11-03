@@ -1,7 +1,3 @@
-import { date } from "yup"
-import { IDoctor } from "../doctor"
-import { IUser } from "../user"
-
 export interface IScheduleRequest {
     hour: Date
     date: Date
