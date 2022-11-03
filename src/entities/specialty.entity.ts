@@ -4,7 +4,7 @@ import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateCol
 class Specialties{
 
     @PrimaryGeneratedColumn('increment')
-    id: string
+    id: number
 
     @Column()
     name: string

@@ -1,4 +1,3 @@
-
 export interface IScheduleRequest {
     hour: Date
     date: Date
