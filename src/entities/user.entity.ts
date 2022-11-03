@@ -27,6 +27,9 @@ class Users{
     @Column()
     sex: string
 
+    @Column()
+    img: string
+
     @CreateDateColumn()
     createdAt: Date
 

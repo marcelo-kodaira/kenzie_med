@@ -1,14 +1,11 @@
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import Doctors from "./doctor.entity";
-import Users from "./user,entity";
+import Users from "./user.entity";
 
 @Entity('schedules')
 class Schedules{
     @PrimaryGeneratedColumn('uuid')
     id: string
-
-    @Column({length: 200})
-    status: string
 
     @CreateDateColumn()
     createdAt: Date
