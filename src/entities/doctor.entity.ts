@@ -12,6 +12,9 @@ class Doctors{
     @Column({length: 200})
     name: string
 
+    @Column({type: 'integer'})
+    age: number
+
     @Column()
     email: string
 
@@ -30,7 +33,6 @@ class Doctors{
 
     @UpdateDateColumn()
     updatedAt: Date
-
 
     @Column({default: true})
     isActive: boolean
