@@ -42,7 +42,7 @@ class Users{
     @Column({default: true})
     isActive: boolean
 
-    @OneToOne(()=> Addresses)
+    @OneToOne(()=> Addresses, { eager: true })
     @JoinColumn()
     address: Addresses
 

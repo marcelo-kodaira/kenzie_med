@@ -13,15 +13,17 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
 	}
 
   jwt.verify(
-    token as string,
+    token,
     process.env.SECRET_KEY as string,
-    (error: any, decoded: any) => {
+    (error, decoded: any) => {
       if (error) {
         throw new AppError("Invalid Token", 403);
       }
-      req.user.id = decoded.sub;
-      req.user.crm = decoded.crm;
-      req.user.isAdm = decoded.isAdm;
+      req.user = {
+        id: decoded.sub,
+        crm: decoded.CRM,
+        isAdmin: decoded.isAdmin
+      };
       next();
     }
   );
