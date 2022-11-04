@@ -2,7 +2,14 @@ import { Request, Response, NextFunction } from "express";
 import AppError from "../Error/AppError";
 
 const verifyUpdateRequestUserMiddleware = (req: Request, res: Response, next: NextFunction) => {
+	const updateUserId = req.params.id;
+	const reqUserId = req.user.id;
+	const isAdmin = req.user.isAdmin;
 	const updateRequest = req.body;
+
+	if (reqUserId !== updateUserId && !isAdmin) {
+		throw new AppError("Unauthorized", 401);
+	}
 
 	if (
 		updateRequest.hasOwnProperty("id") ||

@@ -14,7 +14,7 @@ const createUserService = async ({ name, email, age, password, CPF, sex, img, is
 	const emailAlredyExists = users.find((user) => user.email === email);
 
 	if (emailAlredyExists) {
-		throw new AppError("Email already exist!");
+		throw new AppError("Email already exist");
 	}
 
 	const cpfAlreadyExists = users.find(user => user.CPF === CPF);
