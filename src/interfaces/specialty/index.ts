@@ -1,4 +1,5 @@
 export interface ISpecialtyRequest {
+    id: string
     name: string
 }
 

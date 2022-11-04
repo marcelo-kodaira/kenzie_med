@@ -1,20 +1,21 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, OneToMany } from "typeorm";
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+} from "typeorm";
 import Doctors from "./doctor.entity";
 
+@Entity("specialties")
+class Specialties {
+  @PrimaryGeneratedColumn("increment")
+  id: string;
 
-@Entity('specialties')
-class Specialties{
+  @Column()
+  name: string;
 
-@PrimaryGeneratedColumn('increment')
-id: string
-
-@Column()
-name: string
-
-@OneToMany(()=> Doctors, doctors=> doctors.specialties )
-specialies: Specialties[]
-
-
+  @ManyToOne(() => Doctors, (doctors) => doctors.specialties, { eager: true })
+  doctors: Doctors[];
 }
 
-export default Specialties
+export default Specialties;

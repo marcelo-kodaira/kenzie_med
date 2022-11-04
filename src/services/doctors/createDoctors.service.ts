@@ -6,65 +6,53 @@ import { IDoctorRequest } from "../../interfaces/doctor";
 import Specialties from "../../entities/specialty.entity";
 import AppError from "../../Error/AppError";
 
-const createDoctorService = async({name, email, password, CRM, age, sex, specialtiesId, address }:IDoctorRequest): Promise<Doctors> => {
+const createDoctorService = async ({ name, email, password, CRM, age, sex, specialtiesId, address }: IDoctorRequest)  => {
+  const doctorRepository = AppDataSource.getRepository(Doctors);
+  
+  const doctors = await doctorRepository.find();
 
-const doctorRepository = AppDataSource.getRepository(Doctors);
-const doctors = await doctorRepository.find();
+  const emailAlreadyExists = doctors.find((doctor) => doctor.email === email);
 
-const emailAlreadyExists = doctors.find((doctor) => doctor.email === email);
+  if (emailAlreadyExists) {
+    throw new AppError("Email already exists");
+  }
 
-if(emailAlreadyExists){
-throw new AppError("Email already exists" )
-}
+  const specialtyRepository = AppDataSource.getRepository(Specialties);
 
-const specialtyRepository = AppDataSource.getRepository(Specialties);
-const findSpecialties = await specialtyRepository.findOneBy({
-id: specialtiesId
-});
-console.log("CONCOLE LOG", findSpecialties)
-if(!findSpecialties){
-throw new AppError("Speciality is not exists",404 )
-}
+  const getSpecialtyRepository = await specialtyRepository.findOne({
+    where: { id: specialtiesId.id },
+  });
 
-const addressesRepository = AppDataSource.getRepository(Addresses);
-const findAddresses = await addressesRepository.findOne({
-where: {
-city: address.city,
-district: address.district,
-zipCode: address.zipCode,
-state: address.state,
-number: address.number
-}
-});
+  if (!getSpecialtyRepository) {
+    throw new AppError("Speciality is not exists", 404);
+  }
 
-const createAddresses = addressesRepository.create({
-city: address.city,
-district: address.district,
-zipCode: address.zipCode,
-state: address.state,
-number: address.number
-})
-await addressesRepository.save(createAddresses)
+  const addressesRepository = AppDataSource.getRepository(Addresses);
 
-const doctor = new Doctors()
-doctor.name = name
-doctor.email = email
-doctor.password = bcrypt.hashSync(password, 10)
-doctor.CRM = CRM
-doctor.sex = sex
-doctor.age = age
-doctor.isActive = true
-doctor.createdAt= new Date()
-doctor.updatedAt= new Date()
-doctor.specialties= findSpecialties
-doctor.address= createAddresses
+  const createAddresses = addressesRepository.create({
+    city: address.city,
+    district: address.district,
+    zipCode: address.zipCode,
+    state: address.state,
+    number: address.number,
+  });
+  await addressesRepository.save(createAddresses);
 
-doctorRepository.create(doctor)
+  const doctor = new Doctors();
+  doctor.name = name;
+  doctor.email = email;
+  doctor.password = bcrypt.hashSync(password, 10);
+  doctor.CRM = CRM;
+  doctor.sex = sex;
+  doctor.age = age;
+  doctor.specialties = [getSpecialtyRepository];
+  doctor.address = createAddresses;
 
-await doctorRepository.save(doctor)
+  doctorRepository.create(doctor);
 
-return doctor;
+  await doctorRepository.save(doctor);
 
-}
+  return doctor;
+};
 
-export default createDoctorService
+export default createDoctorService;
