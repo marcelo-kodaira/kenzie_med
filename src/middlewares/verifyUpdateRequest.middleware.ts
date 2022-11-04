@@ -13,7 +13,7 @@ const verifyUpdateRequestUserMiddleware = (req: Request, res: Response, next: Ne
 		updateRequest.hasOwnProperty("updatedAt")
 	) {
 		throw new AppError(
-			"Cannot update id, CPF, isAdim, isActive, createdAt or updatedAt"
+			"Cannot update id, CPF, isAdmin, isActive, createdAt or updatedAt"
 		);
 	}
 

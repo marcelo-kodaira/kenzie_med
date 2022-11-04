@@ -6,6 +6,6 @@ const isDocMiddleware = (req:Request, res:Response, next:NextFunction)=>{
         next()
     }
     
-    throw new AppError("You need to be a doctor to acess this route",401)
+    throw new AppError("You need to be a doctor to access this route",401)
 }
 export default isDocMiddleware

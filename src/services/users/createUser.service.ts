@@ -11,16 +11,16 @@ const createUserService = async ({ name, email, age, password, CPF, sex, img, is
 
 	const users = await userRepository.find();
 
-	const emailAlredyExists = users.find((user) => user.email === email);
+	const emailAlreadyExists = users.find((user) => user.email === email);
 
-	if (emailAlredyExists) {
+	if (emailAlreadyExists) {
 		throw new AppError("Email already exist!");
 	}
 
 	const cpfAlreadyExists = users.find(user => user.CPF === CPF);
 
 	if (cpfAlreadyExists) {
-		throw new AppError("CPF alredy exist")
+		throw new AppError("CPF already exist")
 	}
 
 	const hashedPassword = await bcrypt.hash(password, 10);
