@@ -5,8 +5,7 @@ import AppError from "../../Error/AppError"
 import { IScheduleRequest } from "../../interfaces/schedule"
 
 const createScheduleService = async ({type, description, doctorsID, hour, date}:IScheduleRequest) => {
-
-    console.log("entrou no service")
+   
     const scheduleRepository = AppDataSource.getRepository(Schedules)
 
     const doctorRepository = AppDataSource.getRepository(Doctors)
@@ -17,8 +16,9 @@ const createScheduleService = async ({type, description, doctorsID, hour, date}:
 
     const scheduleAlreadyExist = await scheduleRepository.findOneBy({
         type: type,
+        description: description,
         hour: hour,
-        date: date
+        date: date       
     })
  
     if(scheduleAlreadyExist){
@@ -35,12 +35,14 @@ const createScheduleService = async ({type, description, doctorsID, hour, date}:
             hour: hour,
             date: date,
             doctor: doctor
-       })
+       })   
+       
 
        await scheduleRepository.save(newSchedule)
     
        return newSchedule
-}
+    }
+
  
    
     

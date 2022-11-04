@@ -19,10 +19,9 @@ scheduleRoutes.patch("/edit/:id", authMiddleware, isDocMiddleware, editScheduleC
 scheduleRoutes.patch("/:id", authMiddleware, updateScheduleController);
 scheduleRoutes.delete("/:id", authMiddleware, softDeleteScheduleController);
 scheduleRoutes.delete("/delete/:id", authMiddleware, isAdmMiddleware, isDocMiddleware, deleteScheduleController);
-scheduleRoutes.get("", authMiddleware, isAdmMiddleware, isDocMiddleware,  listSchedulesController);
+scheduleRoutes.get("", authMiddleware, isAdmMiddleware,  listSchedulesController);
 scheduleRoutes.get("/doctor", authMiddleware, isDocMiddleware, listDoctorSchedulesController);
 scheduleRoutes.get("/user", authMiddleware, listUserSchedulesController );
-
 
 
 export default scheduleRoutes;

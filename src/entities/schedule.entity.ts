@@ -29,7 +29,7 @@ class Schedules{
     isAvailable: boolean
 
     @ManyToOne(()=> Users, {eager: true, nullable: true})
-    user: Users
+    user?: Users
 
     @ManyToOne(()=> Doctors, {eager: true})
     doctor: Doctors

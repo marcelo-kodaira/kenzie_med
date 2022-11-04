@@ -9,11 +9,7 @@ const updateScheduleController = async (req: Request, res: Response) => {
     const userID = req.user.id
 
 
-    const updatedSchedule = await updateScheduleService(scheduleID, userID)
-
-    if(updatedSchedule instanceof Schedules){
-        
-    }
+    const updatedSchedule = await updateScheduleService(scheduleID, userID)   
     
     const updated = {
         updatedSchedule,

@@ -4,31 +4,31 @@ import Users from "../../entities/user.entity"
 import AppError from "../../Error/AppError"
 import { IscheduleEdit } from "../../interfaces/schedule"
 
-const softDeleteScheduleService = async (scheduleID:string) => {
-    
+const softDeleteScheduleService = async (scheduleID: string) => {
+
     const scheduleRepository = AppDataSource.getRepository(Schedules)
     const userRepository = AppDataSource.getRepository(Users)
 
-    const scheduleExists = await scheduleRepository.findOneBy({
+    const schedule = await scheduleRepository.findOneBy({
         id: scheduleID
-    }) 
+    })
 
-    if(!scheduleExists){
+    if (!schedule) {
         throw new AppError("Schedule not found", 404)
     }
 
-    const newDate = new Date
-  
-        await scheduleRepository.update(
-            scheduleID,
-            {           
-                updatedAt: newDate,
-                isAvailable: true,
-                user: undefined,                    
-            }
-        )      
+    const today = new Date()
 
-    return !scheduleExists
+    schedule.user = undefined
+    schedule.updatedAt = today
+    schedule.isAvailable = true
+
+    await scheduleRepository.update(
+        scheduleID,
+        schedule
+    )
+
+    return schedule
 }
 
 export default softDeleteScheduleService
