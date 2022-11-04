@@ -13,8 +13,8 @@ const autMiddleware = (req: Request, res: Response, next: NextFunction) => {
         throw new AppError("Invalid Token", 403);
       }
       req.user.id = decoded.sub;
-      req.user.crm = decoded.crm;
-      req.user.isAdm = decoded.isAdm;
+      req.user.crm = decoded.crm || null;
+      req.user.isAdm = decoded.isAdm || null;
       next();
     }
   );
