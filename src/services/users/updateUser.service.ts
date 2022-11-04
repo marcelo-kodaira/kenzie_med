@@ -29,7 +29,7 @@ const updateUserService = async ({ name, email, password, age, sex, img, address
 		if (!addressUser) {
 			throw new AppError("Address not found", 404);
 		}
-		const updateAddress = await addressesRepository.update(addressUser.id, {
+		await addressesRepository.update(addressUser.id, {
 			city: address.city,
 			district: address.district,
 			number: address.number,
