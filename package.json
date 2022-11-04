@@ -7,13 +7,15 @@
     "dev": "ts-node-dev --ignore-watch node_modules src/server.ts",
     "build": "tsc",
     "typeorm": "typeorm-ts-node-commonjs",
-    "test": "cross-env NODE_ENV=test SECRET_KEY=secret_key jest --verbose"
+    "test": "cross-env NODE_ENV=test SECRET_KEY=secret_key jest --verbose",
+    "start": "node dist/app.js"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/express": "^4.17.13",
     "@types/jest": "^28.1.4",
     "@types/jsonwebtoken": "^8.5.9",
+    "@types/node": "^18.11.9",
     "@types/supertest": "^2.0.12",
     "jest": "^28.1.2",
     "sqlite3": "^5.0.8",

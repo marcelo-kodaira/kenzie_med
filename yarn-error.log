@@ -1,0 +1,74 @@
+Arguments: 
+  /home/frederico/.nvm/versions/node/v16.1.0/bin/node /usr/bin/yarn add @types/typeorm --dev
+
+PATH: 
+  /home/frederico/.nvm/versions/node/v16.1.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  16.1.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/@types%2ftypeorm: Not found
+      at Request.params.callback [as _callback] (/usr/lib/node_modules/yarn/lib/cli.js:66145:18)
+      at Request.self.callback (/usr/lib/node_modules/yarn/lib/cli.js:140890:22)
+      at Request.emit (node:events:365:28)
+      at Request.<anonymous> (/usr/lib/node_modules/yarn/lib/cli.js:141862:10)
+      at Request.emit (node:events:365:28)
+      at IncomingMessage.<anonymous> (/usr/lib/node_modules/yarn/lib/cli.js:141784:12)
+      at Object.onceWrapper (node:events:471:28)
+      at IncomingMessage.emit (node:events:377:35)
+      at endReadableNT (node:internal/streams/readable:1312:12)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21)
+
+npm manifest: 
+  {
+    "name": "kenzie_med",
+    "version": "1.0.0",
+    "main": "index.ts",
+    "license": "MIT",
+    "scripts": {
+      "dev": "ts-node-dev --ignore-watch node_modules src/server.ts",
+      "build": "tsc",
+      "typeorm": "typeorm-ts-node-commonjs",
+      "test": "cross-env NODE_ENV=test SECRET_KEY=secret_key jest --verbose",
+      "start": "node dist/app.js"
+    },
+    "devDependencies": {
+      "@types/bcrypt": "^5.0.0",
+      "@types/express": "^4.17.13",
+      "@types/jest": "^28.1.4",
+      "@types/jsonwebtoken": "^8.5.9",
+      "@types/supertest": "^2.0.12",
+      "jest": "^28.1.2",
+      "sqlite3": "^5.0.8",
+      "supertest": "^6.2.4",
+      "ts-jest": "^28.0.5",
+      "ts-node-dev": "^2.0.0",
+      "typescript": "^4.7.4"
+    },
+    "dependencies": {
+      "bcrypt": "^5.1.0",
+      "class-transformer": "^0.5.1",
+      "cross-env": "^7.0.3",
+      "dotenv": "^16.0.1",
+      "express": "^4.18.1",
+      "express-async-errors": "^3.1.1",
+      "jsonwebtoken": "^8.5.1",
+      "pg": "^8.7.3",
+      "reflect-metadata": "^0.1.13",
+      "typeorm": "^0.3.6",
+      "yup": "^0.32.11"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
