@@ -16,6 +16,7 @@ const creteUserController = async (req: Request, res: Response) => {
 		address,
 		isAdmin,
 	});
+	
 	return res.status(201).send(instanceToPlain(newUser));
 };
 

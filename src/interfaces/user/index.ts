@@ -8,7 +8,7 @@ export interface IUserRequest {
     CPF: string
     sex: string
     img: string
-    isAdmin: boolean
+    isAdmin?: boolean
     address: IAddressRequest
 }
 
