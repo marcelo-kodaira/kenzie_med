@@ -7,9 +7,7 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers.authorization?.split(" ")[1];
 
   if (!token) {
-		return res.status(401).json({
-			message: "Missing authorization headers"
-		});
+		throw new AppError("Missing authoprization headers", 401)
 	}
 
   jwt.verify(
@@ -21,9 +19,9 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
       }
       req.user = {
         id: decoded.sub,
-        crm: decoded.CRM,
+        crm: decoded.crm,
         isAdmin: decoded.isAdmin
-      };
+      }
       next();
     }
   );
