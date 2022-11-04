@@ -28,7 +28,7 @@ class Schedules{
     @Column({default: true})
     isAvailable: boolean
 
-    @ManyToOne(()=> Users, {eager: true})
+    @ManyToOne(()=> Users, {eager: true, nullable: true})
     user: Users
 
     @ManyToOne(()=> Doctors, {eager: true})
