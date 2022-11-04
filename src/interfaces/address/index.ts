@@ -1,7 +1,7 @@
 export interface IAddressRequest {
     district: string
     zipCode: string
-    number: string
+    number: number
     city: string
     state: string
 }

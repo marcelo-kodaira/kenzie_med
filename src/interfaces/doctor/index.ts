@@ -32,5 +32,5 @@ export interface IDoctorUpdate {
     age?: number
     sex?: string
     specialtiesId?: number
-    Address?: IAddressUpdate
+    address?: IAddressUpdate
 }

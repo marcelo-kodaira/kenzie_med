@@ -13,6 +13,14 @@ const loginDoctorService = async ({ email, password }: ILogin): Promise<string> 
     email,
   });
 
+  if (!email) {
+		throw new AppError("email is a required information");
+	}
+
+	if (!doctor?.isActive) {
+		throw new AppError("Doctor is currently inactive", 403);
+	}
+
   if (!doctor) {
     throw new AppError("Wrong password or email");
   }

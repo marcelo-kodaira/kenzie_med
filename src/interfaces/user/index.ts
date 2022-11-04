@@ -7,8 +7,9 @@ export interface IUserRequest {
     password: string
     CPF: string
     sex: string
+    img: string
     isAdmin: boolean
-    Address: IAddressRequest
+    address: IAddressRequest
 }
 
 export interface IUser {
@@ -18,11 +19,12 @@ export interface IUser {
     age: number
     CPF: string
     sex: string
+    img: string
     isAdmin: boolean
     isActive: boolean
     createdAt: Date
     updatedAt: Date
-    Address: IAddressRequest
+    address: IAddressRequest
 }
 
 export interface IUserUpdate {
@@ -31,5 +33,6 @@ export interface IUserUpdate {
     password?: string
     age?: number
     sex?: string
-    Address?: IAddressUpdate
+    img?: string
+    address?: IAddressUpdate
 }

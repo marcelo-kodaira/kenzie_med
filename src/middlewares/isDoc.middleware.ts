@@ -1,4 +1,6 @@
 import { NextFunction, Request, Response } from "express";
+import AppError from "../Error/AppError";
+
 const isDocMiddleware = (req:Request, res:Response, next:NextFunction)=>{
     if(req.user.crm){
         next()

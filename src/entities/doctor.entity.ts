@@ -41,7 +41,7 @@ class Doctors{
     @JoinColumn()
     specialties: Specialties
 
-    @OneToOne(()=> Addresses)
+    @OneToOne(()=> Addresses, { eager: true })
     @JoinColumn()
     address: Addresses
 
