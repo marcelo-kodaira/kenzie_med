@@ -7,7 +7,7 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers.authorization?.split(" ")[1];
 
   if (!token) {
-		throw new AppError("Missing authoprization headers", 401)
+		throw new AppError("Missing authorization headers", 401)
 	}
 
   jwt.verify(
