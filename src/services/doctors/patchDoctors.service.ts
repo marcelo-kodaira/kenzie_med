@@ -1,37 +1,62 @@
 import AppDataSource from "../../data-source";
-import { hash } from "bcrypt";
-import { IDoctorUpdate } from "../../interfaces/doctor";
+import Addresses from "../../entities/address.entity";
 import Doctors from "../../entities/doctor.entity";
 import AppError from "../../Error/AppError";
+import { IDoctorUpdate } from "../../interfaces/doctor";
 
-const patchDoctorsService = async({name, email, password, sex, age, specialtiesId, address }: IDoctorUpdate, id: string) => {
+const updateUserService = async ({ name, email, password, CRM, age, sex, address }: IDoctorUpdate, userId: string) => {
 
-    const doctorsRepository = AppDataSource.getRepository(Doctors)
+    const userRepository = AppDataSource.getRepository(Doctors);
 
-    const findDoctor = await doctorsRepository.findOneBy({
-        id
-    })
+    const addressesRepository = AppDataSource.getRepository(Addresses);
 
-    if(!findDoctor){
-        throw new AppError('Doctor not found', 404)
+    const findDoctor = await userRepository.findOneBy({ id: userId });
+
+    const addresses = await addressesRepository.find();
+
+    if (!findDoctor) {
+        throw new AppError("User not found", 404);
     }
 
-    await doctorsRepository.update(
-        id,
-        {
-            name: name ? name : findDoctor.name,
-            email: email ? email : findDoctor.email,
-            password: password ? await hash(password, 10) : findDoctor.password,
-            sex: sex ? sex : findDoctor.sex,
-            age: age ? age : findDoctor.age,     
-        }
-    )
+    const addressDoctor = addresses.find(foundAddress => foundAddress.id === findDoctor.address.id);
+    console.log(addressDoctor)
 
-    const doctor = await doctorsRepository.findOneBy({
-        id
+    if (!addressDoctor) {
+        throw new AppError("Address not found", 404);
+    }
+
+    await userRepository.update(userId, {
+        name,
+        email,
+        password,
+        CRM,
+        age,
+        sex
     });
 
-    return {name,email,password, sex, address};
-}
+    if (address) {
+        if (!addressDoctor) {
+            throw new AppError("Address not found", 404);
+        }
+        await addressesRepository.update(addressDoctor.id, {
+            city: address.city,
+            district: address.district,
+            number: address.number,
+            zipCode: address.zipCode,
+            state: address.state
+        })
+    }
+    const userDoctor = await userRepository.findOne({
+        where: {
+            id: userId
+        },
+        relations: {
+            address: true,
+            specialties: true,
+            schedules: true
+        }
+    });
 
-export default patchDoctorsService
+    return userDoctor!;
+};
+export default updateUserService;

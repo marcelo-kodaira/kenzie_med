@@ -50,7 +50,7 @@ class Doctors {
   @OneToMany(() => Specialties, (specialties) => specialties.doctors)
   specialties: Specialties[];
 
-  @OneToOne(() => Addresses)
+  @OneToOne(() => Addresses, {eager: true})
   @JoinColumn()
   address: Addresses;
 

@@ -1,20 +1,18 @@
-import { instanceToPlain } from "class-transformer";
 import { Request, Response } from "express";
-import { IDoctorRequest } from "../../interfaces/doctor";
-import patchDoctorsService from "../../services/doctors/patchDoctors.service";
+import { IDoctorUpdate } from "../../interfaces/doctor";
+import updateUserService from "../../services/doctors/patchDoctors.service";
 
-const patchDoctorsController = async (req: Request, res: Response) => {
+const updateUserController = async (req: Request, res: Response) => {
 
-  const { name, email, password, sex, address }: IDoctorRequest = req.body;
+    const { name, email, password, CRM, age, sex, address }: IDoctorUpdate= req.body;
 
-  const id: string = req.params.id;
+    const userId = req.params.id;
 
-  const updatedDoctor = await patchDoctorsService(
-    { name, email, password, sex, address },
-    id
-  )
+    const updatedUser = await updateUserService(
+        { name, email, password, CRM, age, sex, address },
+        userId
+    );
 
-  return res.json(instanceToPlain(updatedDoctor));
+    return res.json(updatedUser);
 };
-
-export default patchDoctorsController;
+export default updateUserController;

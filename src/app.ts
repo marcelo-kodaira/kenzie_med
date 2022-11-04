@@ -10,8 +10,9 @@ const app = express();
 app.use(express.json());
 
 app.use("/login", loginRouter);
-app.use(handleErrorMiddleware);
 app.use("/doctors", doctorsRoutes);
 app.use("/specialties", specialtyRoutes);
+
+app.use(handleErrorMiddleware);
 
 export default app;

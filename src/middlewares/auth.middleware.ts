@@ -4,6 +4,7 @@ import "dotenv/config";
 import AppError from "../Error/AppError";
 
 const autMiddleware = (req: Request, res: Response, next: NextFunction) => {
+
   const token = req.headers.authorization?.split(" ")[1];
   jwt.verify(
     token as string,
@@ -12,12 +13,14 @@ const autMiddleware = (req: Request, res: Response, next: NextFunction) => {
       if (error) {
         throw new AppError("Invalid Token", 403);
       }
-      req.user.id = decoded.sub;
-      req.user.crm = decoded.crm;
-      req.user.isAdm = decoded.isAdm;
-      next();
-    }
-  );
+      req.user = {
+        id: decoded.sub,
+        crm: decoded.crm,
+        isAdmin: decoded.isAdmin
+      }
+    });
+
+    next();
 };
 
 export default autMiddleware;

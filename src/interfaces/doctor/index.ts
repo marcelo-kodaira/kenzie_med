@@ -1,5 +1,5 @@
 import { IAddressRequest, IAddressUpdate } from "../address";
-import { ISpecialtyRequest } from "../specialty";
+import { ISpecialtyRequest, ISpecialtyUpdate } from "../specialty";
 
 export interface IDoctorRequest {
   name: string;
@@ -20,7 +20,7 @@ export interface IDoctor {
   CRM: string;
   sex: string;
   isActive: boolean;
-  specialtiesId: string;
+  specialtiesId: ISpecialtyRequest;
   createdAt: Date;
   updatedAt: Date;
   address: IAddressRequest;
@@ -31,7 +31,7 @@ export interface IDoctorUpdate {
   email?: string;
   password?: string;
   age?: number;
+  CRM?: string
   sex?: string;
-  specialtiesId?: string;
   address?: IAddressUpdate;
 }

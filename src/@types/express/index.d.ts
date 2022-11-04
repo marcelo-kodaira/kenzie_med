@@ -6,7 +6,7 @@ declare global {
       user: {
         id: string;
         crm: string;
-        isAdm: boolean;
+        isAdmin: boolean;
       };
     }
   }
