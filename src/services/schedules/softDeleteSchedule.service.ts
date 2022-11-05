@@ -17,15 +17,13 @@ const softDeleteScheduleService = async (scheduleID: string) => {
         throw new AppError("Schedule not found", 404)
     }
 
-    const today = new Date()
-
-    schedule.user = undefined
-    schedule.updatedAt = today
-    schedule.isAvailable = true
 
     await scheduleRepository.update(
         scheduleID,
-        schedule
+        {
+            user = null,
+            isAvailable = true
+        }
     )
 
     return schedule
