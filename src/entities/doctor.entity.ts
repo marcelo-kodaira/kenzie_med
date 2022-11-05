@@ -1,53 +1,61 @@
 import { Exclude } from "class-transformer";
-import { Column, CreateDateColumn, Entity, JoinColumn,    OneToMany,    OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
 import Addresses from "./address.entity";
 import Schedules from "./schedule.entity";
 import Specialties from "./specialty.entity";
 
-@Entity('doctors')
-class Doctors{
-    @PrimaryGeneratedColumn('uuid')
-    id: string
+@Entity("doctors")
+class Doctors {
+  @PrimaryGeneratedColumn("uuid")
+  readonly id: string;
 
-    @Column({length: 200})
-    name: string
+  @Column({ length: 200 })
+  name: string;
 
-    @Column({type: 'integer'})
-    age: number
+  @Column()
+  email: string;
 
-    @Column()
-    email: string
+  @Column()
+  @Exclude()
+  password: string;
 
-    @Column()
-    @Exclude()
-    password: string
+  @Column({ length: 11, unique: true })
+  CRM: string;
 
-    @Column({length: 11})
-    CRM: string
+  @Column()
+  sex: string;
 
-    @Column()
-    sex: string
+  @Column()
+  age: number;
 
-    @CreateDateColumn()
-    createdAt: Date
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @UpdateDateColumn()
-    updatedAt: Date
+  @UpdateDateColumn()
+  updatedAt: Date;
 
-    @Column({default: true})
-    isActive: boolean
+  @Column({ default: true })
+  isActive: boolean;
 
-    @OneToOne(()=> Specialties)
-    @JoinColumn()
-    specialties: Specialties
+  @OneToMany(() => Specialties, (specialties) => specialties.doctors)
+  specialties: Specialties[];
 
-    @OneToOne(()=> Addresses, { eager: true })
-    @JoinColumn()
-    address: Addresses
+  @OneToOne(() => Addresses, {eager: true})
+  @JoinColumn()
+  address: Addresses;
 
-    @OneToMany(()=> Schedules, (schedules) => schedules.doctor)
-    schedules: Schedules[]
-
+  @OneToMany(() => Schedules, (schedules) => schedules.doctor)
+  schedules: Schedules[];
 }
 
-export default Doctors
+export default Doctors;

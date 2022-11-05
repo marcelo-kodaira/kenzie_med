@@ -9,4 +9,5 @@ const loginDoctorController = async (req: Request, res: Response) =>{
     return res.status(200).json({ token })
 
 }
-export default loginDoctorController
+
+export default loginDoctorController;
