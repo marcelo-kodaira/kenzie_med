@@ -8,7 +8,7 @@ const verifyUpdateRequestUserMiddleware = (req: Request, res: Response, next: Ne
 	const updateRequest = req.body;
 
 	if (reqUserId !== updateUserId && !isAdmin) {
-		throw new AppError("Unauthorized", 401);
+		throw new AppError("Unauthorized");
 	}
 
 	if (
@@ -19,9 +19,7 @@ const verifyUpdateRequestUserMiddleware = (req: Request, res: Response, next: Ne
 		updateRequest.hasOwnProperty("createdAt") ||
 		updateRequest.hasOwnProperty("updatedAt")
 	) {
-		throw new AppError(
-			"Cannot update id, CPF, isAdim, isActive, createdAt or updatedAt"
-		);
+		throw new AppError("Cannot update id, CPF, isAdmin, isActive, createdAt or updatedAt");
 	}
 
 	return next();

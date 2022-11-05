@@ -8,21 +8,22 @@ import "dotenv/config";
 
 const loginUserService = async ({ email, password }: ILogin): Promise<string> => {
 	const userRepository = AppDataSource.getRepository(Users);
+	
+	if (!email) {
+		throw new AppError("email is a required information");
+	}
 
 	const user = await userRepository.findOneBy({
 		email
 	});
 
-	if (!email) {
-		throw new AppError("email is a required information");
-	}
 	
 	if (!user) {
 		throw new AppError("Wrong password or email");
 	}
 	
 	if (!user.isActive) {
-		throw new AppError("User is currently inactive",);
+		throw new AppError("User is currently inactive");
 	}
 
 	const matchUser = await compare(password, user.password);

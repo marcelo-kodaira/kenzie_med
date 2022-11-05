@@ -12,7 +12,7 @@ const disableUserService = async (userId: string): Promise<void> => {
 	}
 
 	if (!user.isActive) {
-		throw new AppError('User already disabled');
+		throw new AppError('User already inactive');
 	}
 
 	await userRepository.update(userId, { isActive: false });

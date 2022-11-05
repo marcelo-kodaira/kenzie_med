@@ -6,10 +6,10 @@ import AppError from "../../Error/AppError"
 import { IUserRequest } from "../../interfaces/user";
 
 const createUserService = async ({ name, email, age, password, CPF, sex, img, isAdmin, address }: IUserRequest): Promise<Users> => {
-	const userRepository = AppDataSource.getRepository(Users);
-	const addressRepository = AppDataSource.getRepository(Addresses)
+	const userRepository = AppDataSource.getRepository(Users);	
+	const addressRepository = AppDataSource.getRepository(Addresses)	
 
-	const users = await userRepository.find();
+	const users = await userRepository.find();	
 
 	const emailAlredyExists = users.find((user) => user.email === email);
 
@@ -20,7 +20,7 @@ const createUserService = async ({ name, email, age, password, CPF, sex, img, is
 	const cpfAlreadyExists = users.find(user => user.CPF === CPF);
 
 	if (cpfAlreadyExists) {
-		throw new AppError("CPF alredy exist")
+		throw new AppError("CPF already exist")
 	}
 
 	const hashedPassword = await bcrypt.hash(password, 10);

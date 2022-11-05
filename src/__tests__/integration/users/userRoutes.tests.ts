@@ -2,7 +2,7 @@ import { DataSource } from "typeorm";
 import AppDataSource from "../../../data-source";
 import request from "supertest";
 import app from "../../../app";
-import { mockedUser, mockedAdmin, mockedUserInvalidCpf, mockedUserCpfAlredyExist, mockedUserLogin,	mockedAdminLogin } from "../../mocks/users";
+import { mockedUser, mockedAdmin, mockedUserInvalidCpf, mockedUserCpfAlredyExist, mockedUserLogin, mockedAdminLogin, mockedUserActive } from "../../mocks/users";
 
 describe("/users", () => {
 	let connection: DataSource;
@@ -99,13 +99,12 @@ describe("/users", () => {
 	});
 
     test("DELETE /users/:id -  Must be able to soft delete user", async () => {
-        await request(app).post("/users").send(mockedUser)
+        await request(app).post("/users").send(mockedAdmin)
 
-        const userLoginResponse = await request(app).post("/login/users").send(mockedUserLogin);
         const adminLoginResponse = await request(app).post("/login/users").send(mockedAdminLogin)
-        const UserTobeDeleted = await request(app).get(`/users/${userLoginResponse.body.id}`).set("Authorization", `Bearer ${userLoginResponse.body.token}`)
+        const UserTobeDeleted = await request(app).get("/users").set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
 
-        const response = await request(app).delete(`/users/${UserTobeDeleted.body.id}`).set("Authorization", `Bearer ${userLoginResponse.body.token}`)
+        const response = await request(app).delete(`/users/${UserTobeDeleted.body[0].id}`).set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
         const findUser = await request(app).get('/users').set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
         expect(response.status).toBe(204)
         expect(findUser.body[0].isActive).toBe(false)
@@ -113,20 +112,23 @@ describe("/users", () => {
     })
 
     test("DELETE /users/:id -  Shouldn't be able to delete user with isActive = false", async () => {
-        const userLoginResponse = await request(app).post("/login/users").send(mockedUserLogin);
+		await request(app).post("/users").send(mockedAdmin)
 
-        const response = await request(app).delete(`/users/${userLoginResponse.body.id}`).set("Authorization", `Bearer ${userLoginResponse.body.token}`)
+		const adminLoginResponse = await request(app).post("/login/users").send(mockedAdminLogin);
+		const userTobeDeleted = await request(app).get("/users").set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
+
+        const response = await request(app).delete(`/users/${userTobeDeleted.body[0].id}`).set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
         expect(response.status).toBe(400)
         expect(response.body).toHaveProperty("message")
      
     })
 
     test("DELETE /users/:id -  Should not be able to delete user with invalid id", async () => {
-        await request(app).post('/users').send(mockedUser)
+        await request(app).post('/users').send(mockedAdmin)
 
-        const userLoginResponse = await request(app).post("/login/users").send(mockedUserLogin);
+        const adminLoginResponse = await request(app).post("/login/users").send(mockedAdminLogin);
         
-        const response = await request(app).delete(`/users/13970660-5dbe-423a-9a9d-5c23b37943cf`).set("Authorization", `Bearer ${userLoginResponse.body.token}`)
+        const response = await request(app).delete(`/users/adc961a1-e82a-4392-98b8-8b6687a73586`).set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
         expect(response.status).toBe(404)
         expect(response.body).toHaveProperty("message")
      
@@ -185,5 +187,92 @@ describe("/users", () => {
         expect(response.status).toBe(401)
              
     })
+
+	test("PATCH /users/:id - Should not be able to update user with invalid id", async () => {
+        const newValues = { name: "Daniel Galvan", email: "danielgalvan@mail.com" }
+        const adminLoginResponse = await request(app).post("/login/users").send(mockedAdminLogin);
+        
+    	await request(app).get("/users").set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
+
+        const response = await request(app).patch(`/users/13970660-5dbe-423a-9a9d-5c23b37943cf`).set("Authorization", `Bearer ${adminLoginResponse.body.token}`).send(newValues)
+
+        expect(response.body).toHaveProperty("message")
+        expect(response.status).toBe(404)
+    })
+
+	test("PATCH /users/:id - Should not be able to update isAdmim field value", async () => {
+        const newValues = {isAdmin: false}
+
+        const admingLoginResponse = await request(app).post("/login/users").send(mockedAdminLogin);
+        
+        const userTobeUpdateRequest = await request(app).get("/users").set("Authorization", `Bearer ${admingLoginResponse.body.token}`)
+        const userTobeUpdateId = userTobeUpdateRequest.body[0].id
+
+        const response = await request(app).patch(`/users/${userTobeUpdateId}`).set("Authorization", `Bearer ${admingLoginResponse.body.token}`).send(newValues)
+        expect(response.body).toHaveProperty("message")
+        expect(response.status).toBe(400)
+    })
+
+	test("PATCH /users/:id - Should not be able to update id field value", async () => {
+        const newValues = {id: false}
+
+        const admingLoginResponse = await request(app).post("/login/users").send(mockedAdminLogin);
+        
+        const userTobeUpdateRequest = await request(app).get("/users").set("Authorization", `Bearer ${admingLoginResponse.body.token}`)
+        const userTobeUpdateId = userTobeUpdateRequest.body[0].id
+
+        const response = await request(app).patch(`/users/${userTobeUpdateId}`).set("Authorization", `Bearer ${admingLoginResponse.body.token}`).send(newValues)
+        expect(response.body).toHaveProperty("message")
+        expect(response.status).toBe(400)
+    })
+
+	test("PATCH /users/:id - Should not be able to update CPF field value", async () => {
+        const newValues = {CPF: "12345678911"}
+
+        const admingLoginResponse = await request(app).post("/login/users").send(mockedAdminLogin);
+        
+        const userTobeUpdateRequest = await request(app).get("/users").set("Authorization", `Bearer ${admingLoginResponse.body.token}`)
+        const userTobeUpdateId = userTobeUpdateRequest.body[0].id
+
+        const response = await request(app).patch(`/users/${userTobeUpdateId}`).set("Authorization", `Bearer ${admingLoginResponse.body.token}`).send(newValues)
+        expect(response.body).toHaveProperty("message")
+        expect(response.status).toBe(400)
+    })
+
+	test("PATCH /users/:id - Should not be able to update another user without adm permission", async () => {
+        const newValues = {name: "Alejandro"}
+
+		await request(app).post("/users").send(mockedUserActive)
+
+        const userLoginResponse = await request(app).post("/login/users").send(mockedUserActive);
+        const admingLoginResponse = await request(app).post("/login/users").send(mockedAdminLogin);
+        const userToken = `Bearer ${userLoginResponse.body.token}`
+        const adminToken = `Bearer ${admingLoginResponse.body.token}`
+        
+        const userTobeUpdateRequest = await request(app).get("/users").set("Authorization", adminToken)
+        const userTobeUpdateId = userTobeUpdateRequest.body[0].id
+
+        const response = await request(app).patch(`/users/${userTobeUpdateId}`).set("Authorization", userToken).send(newValues)
+
+        expect(response.body).toHaveProperty("message")
+        expect(response.status).toBe(400)
+    })
+
+	test("PATCH /users/:id - Should be able to update user", async () => {
+        const newValues = {name: "Galvan", email: "galvandaniel@mail.com"}
+
+        const admingLoginResponse = await request(app).post("/login/users").send(mockedAdminLogin);
+        const token = `Bearer ${admingLoginResponse.body.token}`
+        
+        const userTobeUpdateRequest = await request(app).get("/users").set("Authorization", token)
+        const userTobeUpdateId = userTobeUpdateRequest.body[0].id
+
+        const response = await request(app).patch(`/users/${userTobeUpdateId}`).set("Authorization", token).send(newValues)
+
+        expect(response.status).toBe(200)
+        expect(response.body.name).toEqual("Galvan")
+		expect(response.body.email).toEqual("galvandaniel@mail.com")
+        expect(response.body).not.toHaveProperty("password")
+    })   
 
 });
