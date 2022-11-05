@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @types/class-transformer
+  C:\Program Files\nodejs\node.exe C:\Users\Marcus\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js init
 
 PATH: 
-  D:\Curso Programação\Git\mingw64\bin;D:\Curso Programação\Git\usr\bin;C:\Users\dnlgl\bin;C:\Users\dnlgl\AppData\Local\Programs\Python\Python310\Scripts;C:\Users\dnlgl\AppData\Local\Programs\Python\Python310;C:\Python39\Scripts;C:\Python39;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Microsoft VS Code\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;D:\Curso Programação\Git\cmd;C:\Program Files (x86)\Yarn\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\nodejs;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\dnlgl\AppData\Local\Microsoft\WindowsApps;C:\Users\dnlgl\AppData\Local\Yarn\bin;C:\Program Files\heroku\bin;C:\Users\dnlgl\AppData\Roaming\npm;D:\PostgreSQL\14\bin
+  C:\Users\Marcus\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Marcus\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Users\Marcus\AppData\Local\Microsoft\WindowsApps;C:\Users\Marcus\AppData\Roaming\npm;C:\Users\Marcus\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\PostgreSQL\14\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
 
 Yarn version: 
   1.22.19
@@ -906,6 +906,14 @@ Lockfile:
     dependencies:
       "@types/superagent" "*"
   
+<<<<<<< HEAD
+=======
+  "@types/uuid@8.3.4":
+    version "8.3.4"
+    resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-8.3.4.tgz#bd86a43617df0594787d38b735f55c805becf1bc"
+    integrity sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==
+  
+>>>>>>> 54303886afcd85015c8ad98c716a325f2dbccf2d
   "@types/yargs-parser@*":
     version "21.0.0"
     resolved "https://registry.yarnpkg.com/@types/yargs-parser/-/yargs-parser-21.0.0.tgz#0c60e537fa790f5f9472ed2776c2b71ec117351b"
@@ -3134,7 +3142,11 @@ Lockfile:
       postgres-date "~1.0.4"
       postgres-interval "^1.1.0"
   
+<<<<<<< HEAD
   pg@^8.7.3:
+=======
+  pg@^8.8.0:
+>>>>>>> 54303886afcd85015c8ad98c716a325f2dbccf2d
     version "8.8.0"
     resolved "https://registry.yarnpkg.com/pg/-/pg-8.8.0.tgz#a77f41f9d9ede7009abfca54667c775a240da686"
     integrity sha512-UXYN0ziKj+AeNNP7VDMwrehpACThH7LUl/p8TDFpEUuSejCUIwGSfxpHsPvtM6/WXFy6SU4E5RG4IJV/TZAGjw==

@@ -4,7 +4,6 @@ import loginUserController from "../controller/login/loginUser.controller";
 
 const loginRouter = Router();
 
-
 loginRouter.post("/doctors", loginDoctorController);
 loginRouter.post("/users", loginUserController);
 

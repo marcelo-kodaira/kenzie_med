@@ -1,14 +1,21 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+} from "typeorm";
+import Doctors from "./doctor.entity";
 
-@Entity('specialties')
-class Specialties{
+@Entity("specialties")
+class Specialties {
+  @PrimaryGeneratedColumn("increment")
+  id: string;
 
-    @PrimaryGeneratedColumn('increment')
-    id: number
+  @Column()
+  name: string;
 
-    @Column()
-    name: string
-
+  @ManyToOne(() => Doctors, (doctors) => doctors.specialties, { eager: true })
+  doctors: Doctors[];
 }
 
-export default Specialties
+export default Specialties;
