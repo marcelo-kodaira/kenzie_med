@@ -15,8 +15,8 @@ const listUserSchedulesService = async (userID: string): Promise<Schedules[]> =>
         }
     })
 
-    if(userSchedules.length === 0){
-        throw new AppError("User dont have any schedule", 400)
+    if(!userSchedules.length){
+        throw new AppError("User dont have any schedule")
     }
     return userSchedules;
 };

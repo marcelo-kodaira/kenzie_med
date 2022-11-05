@@ -7,7 +7,7 @@ const deleteScheduleController = async (req: Request, res: Response) => {
 
     await deleteScheduleService(scheduleID)  
    
-        return res.status(200).json({
+    return res.status(200).json({
             message: "Deleted with sucess!"
         })
         

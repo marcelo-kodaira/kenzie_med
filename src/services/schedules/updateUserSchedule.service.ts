@@ -27,7 +27,6 @@ const updateScheduleService = async (scheduleID:string, userID:string) => {
         await scheduleRepository.update(
             scheduleID,
             {           
-                updatedAt: newDate,
                 isAvailable: false,
                 user:userExists,                    
             }

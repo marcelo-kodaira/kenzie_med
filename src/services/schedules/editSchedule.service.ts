@@ -3,7 +3,7 @@ import Schedules from "../../entities/schedule.entity"
 import AppError from "../../Error/AppError"
 import { IscheduleEdit } from "../../interfaces/schedule"
 
-const editScheduleService = async (body:IscheduleEdit, scheduleId: string) => {
+const editScheduleService = async ({hour,date,type,description}:IscheduleEdit, scheduleId: string) => {
 
     const scheduleRepository = AppDataSource.getRepository(Schedules)
 
@@ -25,11 +25,10 @@ const editScheduleService = async (body:IscheduleEdit, scheduleId: string) => {
     await scheduleRepository.update(
         scheduleId,
         {
-            type: body.type ? body.type : scheduleExists.type,
-            description: body.description ? body.description : scheduleExists.description,
-            hour: body.hour ? body.hour : scheduleExists.hour,
-            date: body.date ? body.date : scheduleExists.date,
-            updatedAt: newDate
+            type,
+            description,
+            hour,
+            date
         }
     )
 
