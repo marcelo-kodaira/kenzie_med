@@ -20,7 +20,7 @@ const createUserService = async ({ name, email, age, password, CPF, sex, img, is
 	const cpfAlreadyExists = users.find(user => user.CPF === CPF);
 
 	if (cpfAlreadyExists) {
-		throw new AppError("CPF already exist")
+		throw new AppError("CPF already exists")
 	}
 
 	const hashedPassword = await bcrypt.hash(password, 10);
