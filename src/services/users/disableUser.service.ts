@@ -8,7 +8,7 @@ const disableUserService = async (userId: string): Promise<void> => {
 	const user = await userRepository.findOneBy({ id: userId });
 
 	if (!user) {
-		throw new AppError("Invalid Id', 404");
+		throw new AppError("User not found", 404);
 	}
 
 	if (!user.isActive) {

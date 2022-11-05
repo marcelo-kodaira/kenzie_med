@@ -6,22 +6,21 @@ import AppError from "../../Error/AppError"
 import { IUserRequest } from "../../interfaces/user";
 
 const createUserService = async ({ name, email, age, password, CPF, sex, img, isAdmin, address }: IUserRequest): Promise<Users> => {
-	console.log('entrou no service do users')
 	const userRepository = AppDataSource.getRepository(Users);	
 	const addressRepository = AppDataSource.getRepository(Addresses)	
 
 	const users = await userRepository.find();	
-	
-	const emailAlreadyExists = users.find((user) => user.email === email);
 
-	if (emailAlreadyExists) {
-		throw new AppError("Email already exist!");
+	const emailAlredyExists = users.find((user) => user.email === email);
+
+	if (emailAlredyExists) {
+		throw new AppError("Email already exist");
 	}
 
 	const cpfAlreadyExists = users.find(user => user.CPF === CPF);
 
 	if (cpfAlreadyExists) {
-		throw new AppError("CPF already exist")
+		throw new AppError("CPF already exists")
 	}
 
 	const hashedPassword = await bcrypt.hash(password, 10);

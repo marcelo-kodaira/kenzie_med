@@ -1,3 +1,4 @@
+import { classToPlain, instanceToPlain } from "class-transformer";
 import { Request, Response } from "express";
 import { IUserUpdate } from "../../interfaces/user";
 import updateUserService from "../../services/users/updateUser.service";
@@ -9,7 +10,7 @@ const updateUserController = async (req: Request, res: Response) => {
 		{ name, email, password, age, sex, address },
 		userId
 	);
-	return res.json(updatedUser);
+	return res.json(instanceToPlain(updatedUser));
 };
 
 export default updateUserController;

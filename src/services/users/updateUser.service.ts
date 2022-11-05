@@ -11,7 +11,7 @@ const updateUserService = async ({ name, email, password, age, sex, img, address
 	const addresses = await addressesRepository.find();
 	
 	if (!findUser) {
-		throw new AppError("User nor found", 404);
+		throw new AppError("User not found", 404);
 	}
 
 	const addressUser = addresses.find(foundAddress => foundAddress.id === findUser.address.id)

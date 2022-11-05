@@ -5,7 +5,7 @@ const listDoctorSchedulesService = async (doctorCRM:string): Promise<Schedules[]
 
 	const scheduleRepository = AppDataSource.getRepository(Schedules)    
 
-    const dcotorSchedules = await scheduleRepository.find({
+    const doctorSchedules = await scheduleRepository.find({
         where:{
             doctor:{
                 CRM: doctorCRM
@@ -13,7 +13,7 @@ const listDoctorSchedulesService = async (doctorCRM:string): Promise<Schedules[]
         }
     })   
 	
-	return dcotorSchedules;
+	return doctorSchedules;
 };
 
 export default listDoctorSchedulesService;

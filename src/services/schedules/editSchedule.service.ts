@@ -16,7 +16,7 @@ const editScheduleService = async ({hour,date,type,description}:IscheduleEdit, s
     }
 
     if(scheduleExists.user){
-        throw new AppError("Cant modificate schedule! Is already schedule for a user",400)
+        throw new AppError("Cant modify schedule! Is already schedule for a user",400)
     }
 
     const newDate = new Date
