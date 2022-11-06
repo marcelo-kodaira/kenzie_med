@@ -3,21 +3,28 @@ import jwt from "jsonwebtoken";
 import "dotenv/config";
 import AppError from "../Error/AppError";
 
-const autMiddleware = (req: Request, res: Response, next: NextFunction) => {
+const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers.authorization?.split(" ")[1];
+
+  if (!token) {
+		throw new AppError("Missing authorization headers", 401)
+	}
+
   jwt.verify(
-    token as string,
+    token,
     process.env.SECRET_KEY as string,
-    (error: any, decoded: any) => {
+    (error, decoded: any) => {
       if (error) {
         throw new AppError("Invalid Token", 403);
       }
-      req.user.id = decoded.sub;
-      req.user.crm = decoded.crm || null;
-      req.user.isAdm = decoded.isAdm || null;
+      req.user = {
+        id: decoded.sub,
+        crm: decoded.crm,
+        isAdmin: decoded.isAdmin
+      }
       next();
     }
   );
 };
 
-export default autMiddleware;
+export default authMiddleware;
