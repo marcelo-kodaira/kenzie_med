@@ -6,9 +6,10 @@ import { ILogin } from "../../interfaces/login";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 
-const loginUserService = async ({ email, password }: ILogin): Promise<string> => {
+const loginUserService = async ({ email, password }: ILogin) => {
 	const userRepository = AppDataSource.getRepository(Users);
-	
+
+
 	if (!email) {
 		throw new AppError("email is a required information");
 	}
@@ -17,7 +18,6 @@ const loginUserService = async ({ email, password }: ILogin): Promise<string> =>
 		email
 	});
 
-	
 	if (!user) {
 		throw new AppError("Wrong password or email");
 	}

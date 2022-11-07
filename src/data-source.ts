@@ -1,6 +1,7 @@
 import { DataSource } from "typeorm";
 import "dotenv/config";
 import path from "path";
+
 const isProduction = process.env.NODE_ENV === "production";
 const AppDataSource = new DataSource(
   process.env.NODE_ENV === "test"
@@ -20,7 +21,6 @@ const AppDataSource = new DataSource(
           : false,
         synchronize: false,
         logging: isProduction ? false : true,
-
         entities: [path.join(__dirname, "./entities/*.{js,ts}")],
         // process.env.NODE_ENV === "production"
         //   ? ["dist/src/entities/*.js"]

@@ -4,8 +4,8 @@ import listDoctorSchedulesService from "../../services/schedules/listDoctorSched
 
 const listDoctorSchedulesController = async (req: Request, res: Response) => {
 
-    const doctorCRM = req.user.crm
-	const doctorSchedules = await listDoctorSchedulesService(doctorCRM)
+    const doctorID = req.user.id
+	const doctorSchedules = await listDoctorSchedulesService(doctorID)
 	return res.json(instanceToPlain(doctorSchedules))
 
 }

@@ -14,14 +14,14 @@ import isDocMiddleware from "../middlewares/isDoc.middleware";
 
 const scheduleRoutes = Router();
 
-scheduleRoutes.post("", createScheduleController );
+scheduleRoutes.post("", authMiddleware, isDocMiddleware,createScheduleController );
 scheduleRoutes.patch("/edit/:id", authMiddleware, isDocMiddleware, editScheduleController);
 scheduleRoutes.patch("/:id", authMiddleware, updateScheduleController);
 scheduleRoutes.delete("/:id", authMiddleware, softDeleteScheduleController);
-scheduleRoutes.delete("/delete/:id", authMiddleware, isAdmMiddleware, isDocMiddleware, deleteScheduleController);
+scheduleRoutes.delete("/delete/:id", authMiddleware, isDocMiddleware, deleteScheduleController);
 scheduleRoutes.get("", authMiddleware, isAdmMiddleware,  listSchedulesController);
-scheduleRoutes.get("/doctor", authMiddleware, isDocMiddleware, listDoctorSchedulesController);
-scheduleRoutes.get("/user", authMiddleware, listUserSchedulesController );
+scheduleRoutes.get("/doctors", authMiddleware, isDocMiddleware, listDoctorSchedulesController);
+scheduleRoutes.get("/users", authMiddleware, listUserSchedulesController );
 
 
 export default scheduleRoutes;
