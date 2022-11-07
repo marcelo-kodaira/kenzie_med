@@ -1,3 +1,3 @@
 // Procfile
 
-web: node dist/src/app.js
+web: npm start
