@@ -15,9 +15,9 @@ const createScheduleService = async ({type, description, doctorsID, hour, date}:
     })
 
     const scheduleAlreadyExist = await scheduleRepository.findOneBy({
-        type: type,
-        hour: hour,
-        date: date     
+        type,
+        hour,
+        date     
     })
  
     if(scheduleAlreadyExist){
@@ -29,11 +29,11 @@ const createScheduleService = async ({type, description, doctorsID, hour, date}:
     }
     
         const newSchedule = scheduleRepository.create({
-            type:type,
-            description:description,        
-            hour: hour,
-            date: date,
-            doctor: doctor
+            type,
+            description,        
+            hour,
+            date,
+            doctor
        })   
        
 
