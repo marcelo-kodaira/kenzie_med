@@ -3,7 +3,7 @@ import AppDataSource from "../../../data-source";
 import request from "supertest"
 import app from "../../../app";
 import { mockedAdmin, mockedUser, mockedUserActive, mockedUserActiveLogin, mockedUserLogin } from "../../mocks/users";
-// import { mockedAdmin, mockedAdminLogin} from "../../mocks"
+
 
 
 describe("/login", () => {
