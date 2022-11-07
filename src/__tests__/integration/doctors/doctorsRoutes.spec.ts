@@ -31,10 +31,6 @@ describe("Testing /DOCTORS routes", () => {
   });
 
   test("POST /doctors - Should be able to create a new Doctor", async () => {
-    const specialty = await request(app)
-      .post<ISpecialtyUpdate>("/specialties")
-      .send({ name: "Cardiologista" });
-
     const response = await request(app).post("/doctors").send(mockedDoctors[0]);
     expect(response.status).toBe(201);
     expect(response.body).toHaveProperty("id");
