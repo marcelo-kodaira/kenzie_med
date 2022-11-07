@@ -27,7 +27,7 @@ const editScheduleService = async ({hour,date,type,description}:IscheduleEdit, s
             type,
             description,
             hour,
-            date,
+            date
         }
     )
 
