@@ -25,10 +25,11 @@ const editScheduleService = async ({hour,date,type,description}:IscheduleEdit, s
     await scheduleRepository.update(
         scheduleId,
         {
-            type,
-            description,
-            hour,
-            date
+            type: type ? type : scheduleExists.type,
+            description: description ? description : scheduleExists.description,
+            hour: hour ? hour : scheduleExists.hour,
+            date: date ? date : scheduleExists.date,
+            updatedAt: newDate
         }
     )
 

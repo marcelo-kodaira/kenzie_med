@@ -4,6 +4,7 @@ import loginUserService from "../../services/login/loginUser.service"
 
 const loginUserController = async (req: Request, res: Response) =>{
 
+    console.log(req.body)
     const data:ILogin = req.body
     const token = await loginUserService(data)
     return res.status(200).json({ token })

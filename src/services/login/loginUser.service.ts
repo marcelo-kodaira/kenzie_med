@@ -14,7 +14,7 @@ const loginUserService = async ({ email, password }: ILogin): Promise<string> =>
 	}
 
 	const user = await userRepository.findOneBy({
-		email
+		email: email
 	});
 
 	

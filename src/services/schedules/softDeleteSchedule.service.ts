@@ -17,6 +17,7 @@ const softDeleteScheduleService = async (scheduleID: string) => {
         throw new AppError("Schedule not found", 404)
     }
 
+    
 
     await scheduleRepository.update(
         scheduleID,
