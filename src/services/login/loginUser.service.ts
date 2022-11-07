@@ -23,6 +23,7 @@ const loginUserService = async ({ email, password }: ILogin): Promise<string> =>
 	}
 	
 	if (!user.isActive) {
+		console.error(user)
 		throw new AppError("User is currently inactive");
 	}
 

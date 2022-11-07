@@ -17,8 +17,8 @@ describe("/login", () => {
         })
 
         const response = await request(app).post('/users').send(mockedUser)
-
         await request(app).delete(`/users/${response.body.id}`).send(mockedUser)
+
         await request(app).post('/users').send(mockedUserActive)
         await request(app).post('/users').send(mockedAdmin)
     })
