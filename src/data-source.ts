@@ -1,6 +1,8 @@
 import { DataSource } from "typeorm";
 import "dotenv/config";
+import path from "path";
 
+const isProduction = process.env.NODE_ENV === "production";
 const AppDataSource = new DataSource(
   process.env.NODE_ENV === "test"
     ? {
@@ -12,23 +14,21 @@ const AppDataSource = new DataSource(
     : {
         type: "postgres",
         url: process.env.DATABASE_URL,
-        ssl:
-          process.env.NODE_ENV === "production"
-            ? {
-                rejectUnauthorized: false,
-              }
-            : false,
+        ssl: isProduction
+          ? {
+              rejectUnauthorized: false,
+            }
+          : false,
         synchronize: false,
-        logging: true,
-
-        entities:
-          process.env.NODE_ENV === "production"
-            ? ["dist/src/entities/*.js"]
-            : ["src/entities/*.ts"],
-        migrations:
-          process.env.NODE_ENV === "production"
-            ? ["dist/src/migrations/*.js"]
-            : ["src/migrations/*.ts"],
+        logging: isProduction ? false : true,
+        entities: [path.join(__dirname, "./entities/*.{js,ts}")],
+        // process.env.NODE_ENV === "production"
+        //   ? ["dist/src/entities/*.js"]
+        //   : ["src/entities/*.ts"],
+        migrations: [path.join(__dirname, "./migrations/*.{js,ts}")],
+        // process.env.NODE_ENV === "production"
+        //   ? ["dist/src/migrations/*.js"]
+        //   : ["src/migrations/*.ts"],
       }
 );
 
