@@ -21,8 +21,6 @@ const softDeleteScheduleService = async (scheduleID: string) => {
     await scheduleRepository.update(
         scheduleID,
         {
-            user: undefined,
-            isAvailable: true
         }
     )
 
