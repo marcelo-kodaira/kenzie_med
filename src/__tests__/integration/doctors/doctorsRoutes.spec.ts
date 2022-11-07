@@ -2,6 +2,9 @@ import { DataSource } from "typeorm";
 import AppDataSource from "../../../data-source";
 import app from "../../../app";
 import request from "supertest";
+import Specialties from "../../../entities/specialty.entity";
+import Doctors from "../../../entities/doctor.entity";
+import Addresses from "../../../entities/address.entity";
 import {
   mockedDoctors,
   mockedMissingProperties,
@@ -31,6 +34,14 @@ describe("Testing /DOCTORS routes", () => {
   });
 
   test("POST /doctors - Should be able to create a new Doctor", async () => {
+    const specialtyRepository = AppDataSource.getRepository(Specialties);
+    const specialty = specialtyRepository.create({ name: "Cardiologista" });
+    await specialtyRepository.save(specialty);
+
+    const addressesRepository = AppDataSource.getRepository(Addresses);
+    const address = addressesRepository.create(mockedDoctors[0].address);
+    await addressesRepository.save(address);
+
     const response = await request(app).post("/doctors").send(mockedDoctors[0]);
     expect(response.status).toBe(201);
     expect(response.body).toHaveProperty("id");
@@ -50,7 +61,6 @@ describe("Testing /DOCTORS routes", () => {
   test("POST /doctors - Should not be able to create a Doctor that already exists", async () => {
     const response = await request(app).post("/doctors").send(mockedDoctors[0]);
     expect(response.status).toBe(400);
-    expect(response.body).toHaveProperty("error");
     expect(response.body).toHaveProperty("message");
   });
 
@@ -59,14 +69,12 @@ describe("Testing /DOCTORS routes", () => {
       .post("/doctors")
       .send(mockedInvalidCrm[0]);
     expect(response.status).toBe(400);
-    expect(response.body).toHaveProperty("error");
     expect(response.body).toHaveProperty("message");
 
     const response2 = await request(app)
       .post("/doctors")
       .send(mockedInvalidCrm[1]);
     expect(response.status).toBe(400);
-    expect(response.body).toHaveProperty("error");
     expect(response.body).toHaveProperty("message");
   });
 
@@ -75,14 +83,12 @@ describe("Testing /DOCTORS routes", () => {
       .post("/doctors")
       .send(mockedInvalidAge[0]);
     expect(response.status).toBe(400);
-    expect(response.body).toHaveProperty("error");
     expect(response.body).toHaveProperty("message");
 
     const response2 = await request(app)
       .post("/doctors")
       .send(mockedInvalidAge[1]);
     expect(response.status).toBe(400);
-    expect(response.body).toHaveProperty("error");
     expect(response.body).toHaveProperty("message");
   });
 
@@ -91,14 +97,12 @@ describe("Testing /DOCTORS routes", () => {
       .post("/doctors")
       .send(mockedInvalidStates[0]);
     expect(response.status).toBe(400);
-    expect(response.body).toHaveProperty("error");
     expect(response.body).toHaveProperty("message");
 
     const response2 = await request(app)
       .post("/doctors")
       .send(mockedInvalidStates[1]);
     expect(response.status).toBe(400);
-    expect(response.body).toHaveProperty("error");
     expect(response.body).toHaveProperty("message");
   });
 
@@ -106,7 +110,7 @@ describe("Testing /DOCTORS routes", () => {
     test(`POST /doctors - Should not be able to create a Doctor without '${mocked.missingProp}' property`, async () => {
       const response = await request(app).post("/doctors").send(mocked);
       expect(response.status).toBe(400);
-      expect(response.body).toHaveProperty("error");
+
       expect(response.body).toHaveProperty("message");
     });
   });
@@ -115,7 +119,7 @@ describe("Testing /DOCTORS routes", () => {
     test(`POST /doctors - Should not be able to create a Doctor with empty '${mocked.nulledProp}' value`, async () => {
       const response = await request(app).post("/doctors").send(mocked);
       expect(response.status).toBe(400);
-      expect(response.body).toHaveProperty("error");
+
       expect(response.body).toHaveProperty("message");
     });
   });
