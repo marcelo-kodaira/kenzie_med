@@ -7,6 +7,7 @@ import { IUserRequest } from "../../interfaces/user";
 
 const createUserService = async ({ name, email, age, password, CPF, sex, img, isAdmin, address }: IUserRequest): Promise<Users> => {
 	const userRepository = AppDataSource.getRepository(Users);	
+	
 	const addressRepository = AppDataSource.getRepository(Addresses)	
 
 	const users = await userRepository.find();	
