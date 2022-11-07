@@ -19,7 +19,7 @@ const loginUserService = async ({ email, password }: ILogin): Promise<string> =>
 
 	
 	if (!user) {
-		throw new AppError("Wrong password or email");
+		throw new AppError("Wrong password or email",403);
 	}
 	
 	if (!user.isActive) {
@@ -28,7 +28,7 @@ const loginUserService = async ({ email, password }: ILogin): Promise<string> =>
 
 	const matchUser = await compare(password, user.password);
 	if (!matchUser) {
-		throw new AppError("Wrong password or email");
+		throw new AppError("Wrong password or email",403);
 	}
 
 	const token = jwt.sign(

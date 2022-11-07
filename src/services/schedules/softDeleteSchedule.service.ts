@@ -7,7 +7,7 @@ import { IscheduleEdit } from "../../interfaces/schedule"
 const softDeleteScheduleService = async (scheduleID: string) => {
 
     const scheduleRepository = AppDataSource.getRepository(Schedules)
-    const userRepository = AppDataSource.getRepository(Users)
+
 
     const schedule = await scheduleRepository.findOneBy({
         id: scheduleID
@@ -17,12 +17,11 @@ const softDeleteScheduleService = async (scheduleID: string) => {
         throw new AppError("Schedule not found", 404)
     }
 
-
     await scheduleRepository.update(
         scheduleID,
         {
-            userId = null,
-            isAvailable = true
+            user : undefined,
+            isAvailable: true
         }
     )
 
