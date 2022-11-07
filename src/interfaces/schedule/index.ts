@@ -1,6 +1,6 @@
 export interface IScheduleRequest {
-    hour: Date
-    date: Date
+    hour: string
+    date: string
     type: string
     description: string
     doctorsID: string
@@ -8,8 +8,8 @@ export interface IScheduleRequest {
 
 export interface ISchedule {
     id: string
-    hour: Date
-    date: Date
+    hour: string
+    date: string
     type: string
     description: string
     userId: string
@@ -18,3 +18,10 @@ export interface ISchedule {
     updatedAt: Date
 }
 
+
+export interface IscheduleEdit{
+    hour?: string
+    date?: string
+    type?: string
+    description?: string
+}
