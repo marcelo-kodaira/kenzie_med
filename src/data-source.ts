@@ -22,13 +22,7 @@ const AppDataSource = new DataSource(
         synchronize: false,
         logging: isProduction ? false : true,
         entities: [path.join(__dirname, "./entities/*.{js,ts}")],
-        // process.env.NODE_ENV === "production"
-        //   ? ["dist/src/entities/*.js"]
-        //   : ["src/entities/*.ts"],
         migrations: [path.join(__dirname, "./migrations/*.{js,ts}")],
-        // process.env.NODE_ENV === "production"
-        //   ? ["dist/src/migrations/*.js"]
-        //   : ["src/migrations/*.ts"],
       }
 );
 
