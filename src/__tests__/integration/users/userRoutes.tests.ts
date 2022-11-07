@@ -73,6 +73,32 @@ describe("/users", () => {
 		expect(response.body).toHaveLength(2);
 	});
 
+    test("GET /users/profile -  Must be able to list user himself", async () => {
+		await request(app).post("/users").send(mockedAdmin);
+		const adminLoginResponse = await request(app).post("/login/users").send(mockedAdminLogin);
+		const response = await request(app).get("/users/profile").set("Authorization", `Bearer ${adminLoginResponse.body.token}`);
+
+		expect(response.body).toHaveProperty("id");
+		expect(response.body).toHaveProperty("name");
+		expect(response.body).toHaveProperty("password");
+		expect(response.body).toHaveProperty("CPF");
+		expect(response.body).toHaveProperty("email");
+		expect(response.body).toHaveProperty("age");
+		expect(response.body).toHaveProperty("sex");
+		expect(response.body).toHaveProperty("img");
+		expect(response.body).toHaveProperty("isAdmin");
+		expect(response.body).toHaveProperty("address");
+		expect(response.body).toHaveProperty("isActive");
+		expect(response.body).toHaveProperty("createdAt");
+		expect(response.body).toHaveProperty("updatedAt");
+        expect(response.body).toHaveProperty("schedules")
+		expect(response.body.name).toEqual("Daniel");
+		expect(response.body.email).toEqual("daniel2@mail.com");
+		expect(response.body.isAdmin).toEqual(true);
+		expect(response.body.isActive).toEqual(true);
+		expect(response.status).toBe(200);
+	});
+
 	test("GET /users -  Should not be able to list users without authentication", async () => {
 		const response = await request(app).get("/users");
 
