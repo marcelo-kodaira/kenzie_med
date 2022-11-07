@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\Marcus\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js init
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @types/class-transformer
 
 PATH: 
-  C:\Users\Marcus\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Marcus\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\nodejs;C:\Program Files\Git\cmd;C:\Users\Marcus\AppData\Local\Microsoft\WindowsApps;C:\Users\Marcus\AppData\Roaming\npm;C:\Users\Marcus\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\PostgreSQL\14\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+  D:\Curso Programação\Git\mingw64\bin;D:\Curso Programação\Git\usr\bin;C:\Users\dnlgl\bin;C:\Users\dnlgl\AppData\Local\Programs\Python\Python310\Scripts;C:\Users\dnlgl\AppData\Local\Programs\Python\Python310;C:\Python39\Scripts;C:\Python39;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Microsoft VS Code\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;D:\Curso Programação\Git\cmd;C:\Program Files (x86)\Yarn\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\nodejs;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\dnlgl\AppData\Local\Microsoft\WindowsApps;C:\Users\dnlgl\AppData\Local\Yarn\bin;C:\Program Files\heroku\bin;C:\Users\dnlgl\AppData\Roaming\npm;D:\PostgreSQL\14\bin
 
 Yarn version: 
   1.22.19
@@ -36,7 +36,8 @@ npm manifest:
       "dev": "ts-node-dev --ignore-watch node_modules src/server.ts",
       "build": "tsc",
       "typeorm": "typeorm-ts-node-commonjs",
-      "test": "cross-env NODE_ENV=test SECRET_KEY=secret_key jest --verbose"
+      "test": "cross-env NODE_ENV=test SECRET_KEY=secret_key jest --verbose",
+      "start": "node dist/app.js"
     },
     "devDependencies": {
       "@types/bcrypt": "^5.0.0",

@@ -19,7 +19,6 @@ const editScheduleService = async ({hour,date,type,description}:IscheduleEdit, s
         throw new AppError("Cant modify schedule! Is already schedule for a user",400)
     }
 
-    const newDate = new Date
 
 
     await scheduleRepository.update(
