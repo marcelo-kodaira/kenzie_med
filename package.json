@@ -8,7 +8,7 @@
     "build": "tsc",
     "typeorm": "typeorm-ts-node-commonjs",
     "test": "cross-env NODE_ENV=test SECRET_KEY=secret_key jest --verbose",
-    "start": "node dist/src/app.js"
+    "start": "node dist/src/server.js"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
@@ -25,7 +25,6 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "@types/node": "^18.11.9",
     "bcrypt": "^5.1.0",
     "class-transformer": "^0.5.1",
     "cross-env": "^7.0.3",
