@@ -10,7 +10,10 @@ import {
   mockedInvalidStates,
   mockedNulledProperties,
 } from "../../mocks/doctors/index";
-import { ISpecialtyRequest } from "../../../interfaces/specialty/index";
+import {
+  ISpecialtyRequest,
+  ISpecialtyUpdate,
+} from "../../../interfaces/specialty/index";
 
 describe("Testing /DOCTORS routes", () => {
   let connection: DataSource;
@@ -28,10 +31,9 @@ describe("Testing /DOCTORS routes", () => {
   });
 
   test("POST /doctors - Should be able to create a new Doctor", async () => {
-    const specialty: ISpecialtyRequest = await request(app)
-      .post("/specialties")
+    const specialty = await request(app)
+      .post<ISpecialtyUpdate>("/specialties")
       .send({ name: "Cardiologista" });
-    specialty;
 
     const response = await request(app).post("/doctors").send(mockedDoctors[0]);
     expect(response.status).toBe(201);
