@@ -1,5 +1,6 @@
 import { Router } from "express";
 import createDoctorController from "../controller/doctors/createDoctors.controller";
+import getDoctorSchedulesControllerByID from "../controller/doctors/getDoctroSchedules.controller";
 import getProfileDoctorsController from "../controller/doctors/getProfileDoctors.controller";
 import listDoctorsController from "../controller/doctors/listDoctors.controller";
 import listTargetDoctorController from "../controller/doctors/listTargetDoctor.controller";
@@ -16,6 +17,7 @@ doctorsRoutes.post("", createDoctorController);
 doctorsRoutes.get("", listDoctorsController);
 doctorsRoutes.get("/:id", listTargetDoctorController);
 doctorsRoutes.get("/profile", autMiddleware, getProfileDoctorsController);
+doctorsRoutes.get("/:id/schedules", autMiddleware, getDoctorSchedulesControllerByID);
 doctorsRoutes.patch("/:id", patchDoctorsController);
 doctorsRoutes.delete("/:id", autMiddleware, isOwnerMiddleware, softDeleteController);
 /* doctorsRoutes.delete("/delete/:id", autMiddleware, isAdmMiddleware ,permantentDeleteController); */

@@ -16,7 +16,7 @@ const updateScheduleController = async (req: Request, res: Response) => {
         message: "Schedule with sucess"
     }
 
-    return res.status(201).send(instanceToPlain(updated))
+    return res.status(200).send(instanceToPlain(updated))
 }
 
 export default updateScheduleController
