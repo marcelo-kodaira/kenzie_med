@@ -10,6 +10,7 @@ import {
   mockedInvalidStates,
   mockedNulledProperties,
 } from "../../mocks/doctors/index";
+import { ISpecialtyRequest } from "../../../interfaces/specialty/index";
 
 describe("Testing /DOCTORS routes", () => {
   let connection: DataSource;
@@ -27,14 +28,20 @@ describe("Testing /DOCTORS routes", () => {
   });
 
   test("POST /doctors - Should be able to create a new Doctor", async () => {
+    const specialty: ISpecialtyRequest = await request(app)
+      .post("/specialties")
+      .send({ name: "Cardiologista" });
+    specialty;
+
     const response = await request(app).post("/doctors").send(mockedDoctors[0]);
     expect(response.status).toBe(201);
     expect(response.body).toHaveProperty("id");
     expect(response.body).toHaveProperty("name");
     expect(response.body).toHaveProperty("email");
-    expect(response.body).toHaveProperty("crm");
-    expect(response.body).toHaveProperty("specialty");
+    expect(response.body).toHaveProperty("CRM");
+    expect(response.body).toHaveProperty("specialties");
     expect(response.body).toHaveProperty("sex");
+    expect(response.body).toHaveProperty("age");
     expect(response.body).toHaveProperty("isActive");
     expect(response.body).toHaveProperty("createdAt");
     expect(response.body).toHaveProperty("updatedAt");
