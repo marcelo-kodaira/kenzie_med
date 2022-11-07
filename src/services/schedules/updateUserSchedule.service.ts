@@ -20,13 +20,12 @@ const updateScheduleService = async (scheduleID:string, userID:string) => {
     if(!scheduleExists){
         throw new AppError("Schedule not found", 404)
     }
-
-    const newDate = new Date
-
+  
     if(userExists){
         await scheduleRepository.update(
             scheduleID,
-            {           
+            {         
+              
                 isAvailable: false,
                 user:userExists,                    
             }
