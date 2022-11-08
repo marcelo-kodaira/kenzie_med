@@ -8,7 +8,7 @@ export const mockedCreateDoctor = {
 	"name": "Doctor teste",
 	"email": "teste@gmail.com",
 	"password": "123456",
-	"CRM": "MG12446",
+	"CRM": "MG124464",
 	"sex": "Masculino",
 	"age": 33,
 	"specialtiesId": {
