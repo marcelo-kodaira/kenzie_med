@@ -4,13 +4,13 @@ import Doctors from "../../entities/doctor.entity";
 import AppError from "../../Error/AppError";
 import { IDoctorUpdate } from "../../interfaces/doctor";
 
-const updateUserService = async ({ name, email, password, CRM, age, sex, address }: IDoctorUpdate, userId: string) => {
+const updateUserService = async ({ name, email, password, age, sex, address, }: IDoctorUpdate, userId: string) => {
 
-    const userRepository = AppDataSource.getRepository(Doctors);
+    const doctorRepository = AppDataSource.getRepository(Doctors);
 
     const addressesRepository = AppDataSource.getRepository(Addresses);
 
-    const findDoctor = await userRepository.findOneBy({ id: userId });
+    const findDoctor = await doctorRepository.findOneBy({ id: userId });
 
     const addresses = await addressesRepository.find();
 
@@ -19,18 +19,17 @@ const updateUserService = async ({ name, email, password, CRM, age, sex, address
     }
 
     const addressDoctor = addresses.find(foundAddress => foundAddress.id === findDoctor.address.id);
-    console.log(addressDoctor)
 
     if (!addressDoctor) {
         throw new AppError("Address not found", 404);
     }
 
-    await userRepository.update(userId, {
+    await doctorRepository.update(userId, {
         name,
         email,
         password,
-        CRM,
         age,
+        address,
         sex
     });
 
@@ -46,7 +45,8 @@ const updateUserService = async ({ name, email, password, CRM, age, sex, address
             state: address.state
         })
     }
-    const userDoctor = await userRepository.findOne({
+
+    const userDoctor = await doctorRepository.findOne({
         where: {
             id: userId
         },

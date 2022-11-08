@@ -4,12 +4,12 @@ import updateUserService from "../../services/doctors/patchDoctors.service";
 
 const updateUserController = async (req: Request, res: Response) => {
 
-    const { name, email, password, CRM, age, sex, address }: IDoctorUpdate= req.body;
+    const { name, email, password, age, sex, address }: IDoctorUpdate= req.body;
 
     const userId = req.params.id;
 
     const updatedUser = await updateUserService(
-        { name, email, password, CRM, age, sex, address },
+        { name, email, password, age, sex, address },
         userId
     );
 

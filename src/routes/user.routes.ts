@@ -9,7 +9,6 @@ import listAllUsersController from "../controller/users/listAllUsers.controller"
 import retrieveUserController from "../controller/users/retrieveUser.controller";
 import updateUserController from "../controller/users/updateUser.controller";
 import disableUserController from "../controller/users/disableUser.constroller";
-import deleteUserController from "../controller/users/deleteUser.controller";
 
 const userRoutes = Router();
 
@@ -18,6 +17,5 @@ userRoutes.get("", authMiddleware, isAdmMiddleware, listAllUsersController);
 userRoutes.get("/profile", authMiddleware, retrieveUserController);
 userRoutes.patch("/:id", authMiddleware, verifyUpdateRequestUserMiddleware, updateUserController);
 userRoutes.delete("/:id", authMiddleware, disableUserController);
-userRoutes.delete("/delete/:id", authMiddleware, isAdmMiddleware, deleteUserController);
 
 export default userRoutes;
