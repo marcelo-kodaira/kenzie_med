@@ -31,7 +31,7 @@ export interface IDoctorUpdate {
   email?: string;
   password?: string;
   age?: number;
-  CRM?: string
+  CRM?: string;
   sex?: string;
   address?: IAddressUpdate;
 }
