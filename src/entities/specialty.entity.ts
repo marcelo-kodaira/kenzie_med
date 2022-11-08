@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm"
+import { Exclude } from "class-transformer"
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from "typeorm"
 import Doctors from "./doctor.entity"
 
 @Entity("specialties")
@@ -9,7 +10,8 @@ class Specialties {
   @Column()
   name: string
 
-  @ManyToOne(() => Doctors, (doctors) => doctors.specialties, { eager: true })
+  @OneToMany(() => Doctors, (doctors) => doctors.specialties)
+  @Exclude()
   doctors: Doctors[]
 }
 

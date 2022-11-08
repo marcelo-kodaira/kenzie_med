@@ -37,8 +37,8 @@ class Doctors {
   @Column({ default: true })
   isActive: boolean
 
-  @OneToMany(() => Specialties, (specialties) => specialties.doctors)
-  specialties: Specialties[]
+  @ManyToOne(() => Specialties, (specialties) => specialties.doctors)
+  specialties: Specialties
 
   @OneToOne(() => Addresses, { eager: true })
   @JoinColumn()
