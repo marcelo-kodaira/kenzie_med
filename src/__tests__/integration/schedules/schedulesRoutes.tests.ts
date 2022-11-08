@@ -3,7 +3,6 @@ import AppDataSource from "../../../data-source";
 import request from "supertest";
 import app from "../../../app";
 import { mockedUser, mockedAdmin, mockedUserInvalidCpf, mockedUserCpfAlredyExist, mockedUserLogin, mockedAdminLogin, mockedUserActive } from "../../mocks/users";
-import { mockedDoctors } from "../../mocks/doctors";
 import { mockedCreateDoctor, mockedCreateSpeciality, mockedLoginDoctor } from "../../mocks/schedules";
 
 describe("/schedules", () => {
@@ -29,10 +28,12 @@ describe("/schedules", () => {
 		await connection.destroy();
 	});
 
-	test("POST /schedules - User admin - Should be able to create a schedule", async () => {
+	test("POST /schedules - DOCTOR - Should be able to create a schedule", async () => {
 		const doctorLoginResponse = await request(app).post("/login/doctors").send(mockedLoginDoctor);
-		const doctor = await request(app).get("/doctors")
 
+		const adminloginReponse = await request(app).post("/login/users").send(mockedAdminLogin);
+		const doctor = await request(app).get("/doctors").set("Authorization", `Bearer ${adminloginReponse.body.token}`)
+		
 		const scheduleCreate = {
 			type: "consulta",
 			description: "consulta",
@@ -41,7 +42,9 @@ describe("/schedules", () => {
 			date: "12/11/2022"
 		}
 
-		const response = await request(app).post("/schedules").set("Authorization", `Bearer ${doctorLoginResponse.body.token}`).send(scheduleCreate);
+		const response = await request(app).post("/schedules")
+		.set("Authorization", `Bearer ${doctorLoginResponse.body.token}`).send(scheduleCreate);
+
 		expect(response.body).toHaveProperty("id");
 		expect(response.body).toHaveProperty("date");
 		expect(response.body).toHaveProperty("hour");
@@ -54,8 +57,40 @@ describe("/schedules", () => {
 		expect(response.status).toBe(201);
 	});
 
-	test("POST /schedules - User comum - Should not be able to create a schedule", async () => {
-		const doctor = await request(app).get("/doctors")
+	test("POST /schedules - ADMIN - Should be able to create a schedule", async () => {		
+
+		const adminloginReponse = await request(app).post("/login/users").send(mockedAdminLogin);
+		const doctor = await request(app).get("/doctors").set("Authorization", `Bearer ${adminloginReponse.body.token}`)
+		
+		const scheduleCreate = {
+			type: "consulta",
+			description: "consulta",
+			doctorsID: doctor.body[0].id,
+			hour: "18:00",
+			date: "01/06/2023"
+		}
+
+		const response = await request(app).post("/schedules")
+		.set("Authorization", `Bearer ${adminloginReponse.body.token}`).send(scheduleCreate);
+
+		expect(response.body).toHaveProperty("id");
+		expect(response.body).toHaveProperty("date");
+		expect(response.body).toHaveProperty("hour");
+		expect(response.body).toHaveProperty("type");
+		expect(response.body).toHaveProperty("createdAt");
+		expect(response.body).toHaveProperty("updatedAt");
+		expect(response.body).toHaveProperty("description");
+		expect(response.body).toHaveProperty("isAvailable");
+		expect(response.body.isAvailable).toEqual(true);
+		expect(response.status).toBe(201);
+	});
+
+	test("POST /schedules - USER - Should not be able to create a schedule", async () => {
+		
+		const userloginReponse = await request(app).post("/login/users").send(mockedUserLogin);
+
+		const adminloginReponse = await request(app).post("/login/users").send(mockedAdminLogin);
+		const doctor = await request(app).get("/doctors").set("Authorization", `Bearer ${adminloginReponse.body.token}`)
 
 		const scheduleCreate = {
 			type: "consulta",
@@ -65,7 +100,7 @@ describe("/schedules", () => {
 			date: "12/11/2022"
 		}
 
-		const response = await request(app).post("/schedules").send(scheduleCreate);
+		const response = await request(app).post("/schedules").set("Authorization", `Bearer ${userloginReponse.body.token}`).send(scheduleCreate);
 
 		expect(response.body).toHaveProperty("message");
 		expect(response.status).toBe(401);
@@ -73,7 +108,10 @@ describe("/schedules", () => {
 
 	test("POST /schedules - Schedule already exists", async () => {
 
-		const doctor = await request(app).get("/doctors")
+		const adminloginReponse = await request(app).post("/login/users").send(mockedAdminLogin);
+		const doctor = await request(app).get("/doctors").set("Authorization", `Bearer ${adminloginReponse.body.token}`)
+	
+		const doctorLogin = await request(app).post("/login/doctors").send(mockedLoginDoctor);
 
 		const scheduleCreate = {
 			type: "consulta",
@@ -83,10 +121,11 @@ describe("/schedules", () => {
 			date: "12/11/2022"
 		}
 
-		const response = await request(app).post("/schedules").send(scheduleCreate);
+		const response = await request(app).post("/schedules")
+		.set("Authorization", `Bearer ${doctorLogin.body.token}`).send(scheduleCreate);
 
 		expect(response.body).toHaveProperty("message");
-		expect(response.status).toBe(401);
+		expect(response.status).toBe(400);
 	});
 
 	test("PATCH /schedules/edit/:id - DOCTORS -  Should not be able to edit schedule without authentication", async () => {			
@@ -260,7 +299,7 @@ describe("/schedules", () => {
 
 		const response = await request(app).get("/schedules").set("Authorization", `Bearer ${adminLoginResponse.body.token}`);
 
-		expect(response.body).toHaveLength(1);
+		expect(response.body).toHaveLength(2);
 	});
 
 	test("GET /schedules -  Should not be able to list schedules without authentication", async () => {
@@ -293,7 +332,7 @@ describe("/schedules", () => {
 		const userLoginResponse = await request(app).post("/login/doctors").send(mockedLoginDoctor);
 		const response = await request(app).get("/schedules/doctors").set("Authorization", `Bearer ${userLoginResponse.body.token}`);
 
-		expect(response.body).toHaveLength(1);
+		expect(response.body).toHaveLength(2);
 	});
 
 
