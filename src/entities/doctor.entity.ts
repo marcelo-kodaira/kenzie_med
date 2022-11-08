@@ -1,61 +1,51 @@
-import { Exclude } from "class-transformer";
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  OneToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from "typeorm";
-import Addresses from "./address.entity";
-import Schedules from "./schedule.entity";
-import Specialties from "./specialty.entity";
+import { Exclude } from "class-transformer"
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import Addresses from "./address.entity"
+import Schedules from "./schedule.entity"
+import Specialties from "./specialty.entity"
 
 @Entity("doctors")
 class Doctors {
   @PrimaryGeneratedColumn("uuid")
-  readonly id: string;
+  readonly id: string
 
   @Column({ length: 200 })
-  name: string;
+  name: string
 
   @Column()
-  email: string;
+  email: string
 
   @Column()
   @Exclude()
-  password: string;
+  password: string
 
   @Column({ length: 11, unique: true })
-  CRM: string;
+  CRM: string
 
   @Column()
-  sex: string;
+  sex: string
 
   @Column()
-  age: number;
+  age: number
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt: Date
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt: Date
 
   @Column({ default: true })
-  isActive: boolean;
+  isActive: boolean
 
   @OneToMany(() => Specialties, (specialties) => specialties.doctors)
-  specialties: Specialties[];
+  specialties: Specialties[]
 
-  @OneToOne(() => Addresses, {eager: true})
+  @OneToOne(() => Addresses, { eager: true })
   @JoinColumn()
-  address: Addresses;
+  address: Addresses
 
   @OneToMany(() => Schedules, (schedules) => schedules.doctor)
-  schedules: Schedules[];
+  schedules: Schedules[]
 }
 
-export default Doctors;
+export default Doctors

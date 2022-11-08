@@ -1,31 +1,26 @@
-import AppDataSource from "../../data-source";
-import Addresses from "../../entities/address.entity";
-import Doctors from "../../entities/doctor.entity";
-import AppError from "../../Error/AppError";
-import { IDoctorUpdate } from "../../interfaces/doctor";
+import AppDataSource from "../../data-source"
+import Addresses from "../../entities/address.entity"
+import Doctors from "../../entities/doctor.entity"
+import AppError from "../../Error/AppError"
+import { IDoctorUpdate } from "../../interfaces/doctor"
 
-const updateUserService = async (
-  { name, email, password, age, sex, address }: IDoctorUpdate,
-  userId: string
-) => {
-  const userRepository = AppDataSource.getRepository(Doctors);
+const updateUserService = async ({ name, email, password, age, sex, address }: IDoctorUpdate, userId: string) => {
+  const userRepository = AppDataSource.getRepository(Doctors)
 
-  const addressesRepository = AppDataSource.getRepository(Addresses);
+  const addressesRepository = AppDataSource.getRepository(Addresses)
 
-  const findDoctor = await userRepository.findOneBy({ id: userId });
+  const findDoctor = await userRepository.findOneBy({ id: userId })
 
-  const addresses = await addressesRepository.find();
+  const addresses = await addressesRepository.find()
 
   if (!findDoctor) {
-    throw new AppError("User not found", 404);
+    throw new AppError("User not found", 404)
   }
 
-  const addressDoctor = addresses.find(
-    (foundAddress) => foundAddress.id === findDoctor.address.id
-  );
+  const addressDoctor = addresses.find((foundAddress) => foundAddress.id === findDoctor.address.id)
 
   if (!addressDoctor) {
-    throw new AppError("Address not found", 404);
+    throw new AppError("Address not found", 404)
   }
 
   await userRepository.update(userId, {
@@ -34,11 +29,11 @@ const updateUserService = async (
     password,
     age,
     sex,
-  });
+  })
 
   if (address) {
     if (!addressDoctor) {
-      throw new AppError("Address not found", 404);
+      throw new AppError("Address not found", 404)
     }
     await addressesRepository.update(addressDoctor.id, {
       city: address.city,
@@ -46,7 +41,7 @@ const updateUserService = async (
       number: address.number,
       zipCode: address.zipCode,
       state: address.state,
-    });
+    })
   }
   const userDoctor = await userRepository.findOne({
     where: {
@@ -57,8 +52,8 @@ const updateUserService = async (
       specialties: true,
       schedules: true,
     },
-  });
+  })
 
-  return userDoctor!;
-};
-export default updateUserService;
+  return userDoctor!
+}
+export default updateUserService

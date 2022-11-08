@@ -1,36 +1,36 @@
-import { IAddressRequest, IAddressUpdate } from "../address";
-import { ISpecialtyRequest } from "../specialty";
+import { IAddressRequest, IAddressUpdate } from "../address"
+import { ISpecialtyRequest } from "../specialty"
 
 export interface IDoctorRequest {
-  name: string;
-  email: string;
-  password: string;
-  age: number;
-  CRM: string;
-  sex: string;
-  specialtiesId: ISpecialtyRequest;
-  address: IAddressRequest;
+  name: string
+  email: string
+  password: string
+  age: number
+  CRM: string
+  sex: string
+  specialtiesId: ISpecialtyRequest
+  address: IAddressRequest
 }
 
 export interface IDoctor {
-  id: string;
-  name: string;
-  email: string;
-  age: number;
-  CRM: string;
-  sex: string;
-  isActive: boolean;
-  specialtiesId: ISpecialtyRequest;
-  createdAt: Date;
-  updatedAt: Date;
-  address: IAddressRequest;
+  id: string
+  name: string
+  email: string
+  age: number
+  CRM: string
+  sex: string
+  isActive: boolean
+  specialtiesId: ISpecialtyRequest
+  createdAt: Date
+  updatedAt: Date
+  address: IAddressRequest
 }
 
 export interface IDoctorUpdate {
-  name?: string;
-  email?: string;
-  password?: string;
-  age?: number;
-  sex?: string;
-  address?: IAddressUpdate;
+  name?: string
+  email?: string
+  password?: string
+  age?: number
+  sex?: string
+  address?: IAddressUpdate
 }

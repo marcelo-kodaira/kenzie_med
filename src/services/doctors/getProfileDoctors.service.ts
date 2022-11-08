@@ -1,9 +1,9 @@
-import AppDataSource from "../../data-source";
-import Doctors from "../../entities/doctor.entity";
-import AppError from "../../Error/AppError";
+import AppDataSource from "../../data-source"
+import Doctors from "../../entities/doctor.entity"
+import AppError from "../../Error/AppError"
 
 const getProfileDoctorsService = async (id: string) => {
-  const doctorRepository = AppDataSource.getRepository(Doctors);
+  const doctorRepository = AppDataSource.getRepository(Doctors)
 
   const getDoctorProfile = await doctorRepository.findOne({
     where: {
@@ -14,13 +14,13 @@ const getProfileDoctorsService = async (id: string) => {
       schedules: true,
       specialties: true,
     },
-  });
+  })
 
   if (!getDoctorProfile) {
-    throw new AppError("Doctor not found!", 404);
+    throw new AppError("Doctor not found!", 404)
   }
 
-  return getDoctorProfile;
-};
+  return getDoctorProfile
+}
 
-export default getProfileDoctorsService;
+export default getProfileDoctorsService

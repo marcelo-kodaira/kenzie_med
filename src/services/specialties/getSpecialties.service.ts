@@ -1,14 +1,12 @@
-import AppDataSource from "../../data-source";
-import Specialties from "../../entities/specialty.entity";
+import AppDataSource from "../../data-source"
+import Specialties from "../../entities/specialty.entity"
 
 const getSpecialtiesService = async () => {
+  const specialtiesRepository = AppDataSource.getRepository(Specialties)
 
-    const specialtiesRepository = AppDataSource.getRepository(Specialties); 
+  const specialties = await specialtiesRepository.find()
 
-    const specialties = await specialtiesRepository.find();
-
-    return specialties;
-
+  return specialties
 }
 
-export default getSpecialtiesService;
+export default getSpecialtiesService

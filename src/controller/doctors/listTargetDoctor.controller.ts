@@ -1,13 +1,13 @@
-import { Request, Response } from "express";
-import listTargetDoctorService from "../../services/doctors/listTargetDoctor.service";
-import { instanceToPlain } from "class-transformer";
+import { Request, Response } from "express"
+import listTargetDoctorService from "../../services/doctors/listTargetDoctor.service"
+import { instanceToPlain } from "class-transformer"
 
 const listTargetDoctorController = async (req: Request, res: Response) => {
-  const id = req.params.id;
+  const id = req.params.id
 
-  const listDoctorsById = await listTargetDoctorService(id);
+  const listDoctorsById = await listTargetDoctorService(id)
 
-  return res.status(200).json(instanceToPlain(listDoctorsById));
-};
+  return res.status(200).json(instanceToPlain(listDoctorsById))
+}
 
-export default listTargetDoctorController;
+export default listTargetDoctorController
