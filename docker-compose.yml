@@ -9,7 +9,7 @@ services:
     env_file:
       - .env
     depends_on:
-      db:
+      kenzie_med:
         condition: service_healthy
     volumes:
       - .:/app
