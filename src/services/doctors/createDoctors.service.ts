@@ -45,7 +45,7 @@ const createDoctorService = async ({ name, email, password, CRM, age, sex, speci
   doctor.CRM = CRM
   doctor.sex = sex
   doctor.age = age
-  doctor.specialties = [getSpecialtyRepository]
+  doctor.specialties = getSpecialtyRepository
   doctor.address = createAddresses
 
   doctorRepository.create(doctor)

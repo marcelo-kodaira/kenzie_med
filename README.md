@@ -767,23 +767,29 @@ Response: 201 CREATED
 
 ```
         {
-        "id": "960c3f4c-ad79-4947-b99e-563f92ceaf2f",
-        "name": "Tiririca",
-        "email": "tiririca@mail.com",
-        "CRM": "MG 789123",
-        "speciality": “cirurgião”,
+	"name": "test",
+        "email": "test@gmail.com",
+        "password": "1234445",
+        "CRM": "MG12446",
         "sex": "Masculino",
-        "isActive": true,
-        "createdAt": "2022-11-03T01:13:51.230Z",
-        "updatedAt": "2022-11-03T01:13:51.230Z",
-        "address": {
-                "district": "Rua Brasolia",
-                "zipCode": "31030010",
-                "number": "1000",
-                "city": "Brasilandia",
-                "state": "DF"
-                }
-        }	
+        "age": 33,
+	"specialties": {
+		"id": 1,
+		"name": "Médico do zuvido"
+	},
+	"address": {
+                "district": "Rua Doctor Pires de camargo",
+                "zipCode": "18155000",
+                "number": "68",
+                "city": "Piedade",
+                "state": "SP",
+                "id": "c6d46472-b25b-4406-82d0-1459273cd5d2"
+        },
+	"id": "839e1f17-4bd8-4292-8d69-a6584edeed0a",
+	"createdAt": "2022-11-08T21:19:07.299Z",
+	"updatedAt": "2022-11-08T21:19:07.299Z",
+	"isActive": true
+}	
 ```
 
 ### ERRORS 
@@ -956,29 +962,28 @@ Response: 200 OK
 ```
         [
         {
-        "id": "960c3f4c-ad79-4947-b99e-563f92ceaf2f",
-        "name": "Tiririca",
-        "CRM": "MG 789123",
-        "speciality": {
-            “cirurgião”,
-            “ obstetra”
-            }
-        "sex": "Masculino",
-        },
-        {
-        "id": "563f92ceaf2f-ad79-4947-b99e-960c3f4c",
-        "name": "Tirulipa",
-        "CRM": "DF 123789",
-        "speciality": “Dentista”,
-        "sex": "Masculino",
-        },
-        {
-        "id": "ad79-4947-563f92ceaf2f-b99e-960c3f4c",
-        "name": “Jubiscleyde",
-        "CRM": "SP 456852",
-        "speciality": “Ginecologista”,
-        "sex": "Feminino",
-        },
+		"id": "839e1f17-4bd8-4292-8d69-a6584edeed0a",
+		"name": "Tadeu",
+		"email": "medicotadeu3@gmail.com",
+		"CRM": "MG123414",
+		"sex": "Masculino",
+		"age": 33,
+		"createdAt": "2022-11-08T21:19:07.299Z",
+		"updatedAt": "2022-11-08T21:19:07.299Z",
+		"isActive": true,
+		"specialties": {
+			"id": 3,
+			"name": "Médico do zuvido"
+		},
+		"address": {
+			"id": "c6d46472-b25b-4406-82d0-1459273cd5d2",
+			"district": "Rua Doctor Pires de camargo",
+			"zipCode": "18155000",
+			"number": 68,
+			"state": "SP",
+			"city": "Piedade"
+		}
+	}
         ]	
 ```
 
@@ -1319,7 +1324,7 @@ Response body: 404 Not Found,
 ```
 
 
-## PATCH - /schedules/:<id>
+## PATCH - /schedules/:<"id">
 
 Edite do agendamento, com o seguinte corpo:
 A rota pode ser acessada pelo usuário e pelo admin;
@@ -1345,20 +1350,58 @@ Response: 200 OK
 
 ```
         {
-            "updatedSchedule": {
-                "id": "b9dc1325-90d5-4324-8f43-4860de924563",
-                "createdAt": "2022-11-04T16:10:44.521Z",
-                "updatedAt": "2022-11-04T16:10:44.521Z",
-                "date": "2022-11-12",
-                "hour": "18:00:00",
-                "type": "consulta",
-                "description": "consulta",
-                "isAvailable": true,
-                "user": null,
-                "doctor": null
-            },
-            "message": "Schedule with success"
-        }
+	"updatedSchedule": {
+		"id": "28664ebc-7acd-4d36-b0ab-0a55bc9359e9",
+		"createdAt": "2022-11-08T20:54:47.292Z",
+		"updatedAt": "2022-11-08T21:10:07.297Z",
+		"date": "2022-11-07",
+		"hour": "11:00:00",
+		"type": "TestSchedule2",
+		"description": "Testando",
+		"isAvailable": false,
+		"user": {
+			"id": "eb32e08e-5acf-4288-b744-8cb2492f03d2",
+			"name": "isAdmin",
+			"email": "isAdmin2@gmail.com",
+			"CPF": "12345678955",
+			"age": 30,
+			"sex": "Masculino",
+			"img": "https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png",
+			"createdAt": "2022-11-08T20:49:56.010Z",
+			"updatedAt": "2022-11-08T20:49:56.010Z",
+			"isAdmin": true,
+			"isActive": true,
+			"address": {
+				"id": "cc2fdafc-dc0d-422a-b5e8-a9552eed96b4",
+				"district": "Rua Arnold Schwarzenegger",
+				"zipCode": "12345678",
+				"number": 5000,
+				"state": "SP",
+				"city": "Stronger"
+			}
+		},
+		"doctor": {
+			"id": "67efc4eb-01a0-49ca-9b31-d87fbd7d745c",
+			"name": "Tadeu",
+			"email": "medicotadeu3@gmail.com",
+			"CRM": "MG123414",
+			"sex": "Masculino",
+			"age": 33,
+			"createdAt": "2022-11-08T20:54:04.111Z",
+			"updatedAt": "2022-11-08T20:54:04.111Z",
+			"isActive": true,
+			"address": {
+				"id": "1130951f-746c-4213-95b2-1b4127085243",
+				"district": "Rua Doctor Pires de camargo",
+				"zipCode": "18155000",
+				"number": 68,
+				"state": "SP",
+				"city": "Piedade"
+			}
+		}
+	},
+	"message": "Schedule with sucess"
+}
 ```
 
 
