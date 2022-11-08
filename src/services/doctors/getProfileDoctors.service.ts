@@ -3,7 +3,6 @@ import Doctors from "../../entities/doctor.entity";
 import AppError from "../../Error/AppError";
 
 const getProfileDoctorsService = async (id: string) => {
-
   const doctorRepository = AppDataSource.getRepository(Doctors);
 
   const getDoctorProfile = await doctorRepository.findOne({
