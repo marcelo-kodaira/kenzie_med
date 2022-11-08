@@ -47,27 +47,27 @@ export const mockedDoctors = [
       state: "OK",
     },
   },
-];
+]
 
 interface INulledTest {
-  name?: string | null;
-  email?: string | null;
-  password?: string | null;
-  CRM?: string | null;
-  age?: number | null | string;
-  specialtiesId?: { id: number | null } | null | string;
-  sex?: string | null;
+  name?: string | null
+  email?: string | null
+  password?: string | null
+  CRM?: string | null
+  age?: number | null | string
+  specialtiesId?: { id: number | null } | null | string
+  sex?: string | null
   address?:
     | {
-        district?: string | null;
-        zipCode?: string | null;
-        number?: number | null | string;
-        city?: string | null;
-        state?: string | null;
+        district?: string | null
+        zipCode?: string | null
+        number?: number | null | string
+        city?: string | null
+        state?: string | null
       }
     | null
-    | string;
-  nulledProp: string;
+    | string
+  nulledProp: string
 }
 
 export const mockedNulledProperties: INulledTest[] = [
@@ -303,24 +303,24 @@ export const mockedNulledProperties: INulledTest[] = [
     address: "",
     nulledProp: "address",
   },
-];
+]
 
 interface IMissingTest {
-  name?: string;
-  email?: string;
-  password?: string;
-  CRM?: string;
-  age?: number;
-  specialtiesId?: { id: number };
-  sex?: string;
+  name?: string
+  email?: string
+  password?: string
+  CRM?: string
+  age?: number
+  specialtiesId?: { id: number }
+  sex?: string
   address?: {
-    district: string;
-    zipCode: string;
-    number: number;
-    city: string;
-    state: string;
-  };
-  missingProp: string;
+    district: string
+    zipCode: string
+    number: number
+    city: string
+    state: string
+  }
+  missingProp: string
 }
 
 export const mockedMissingProperties: IMissingTest[] = [
@@ -429,7 +429,7 @@ export const mockedMissingProperties: IMissingTest[] = [
     specialtiesId: { id: 1 },
     missingProp: "address",
   },
-];
+]
 
 //CRM deve possuir no maximo 8 caracteres (2 letras e 6 numeros)
 export const mockedInvalidCrm = [
@@ -465,7 +465,7 @@ export const mockedInvalidCrm = [
       state: "AL",
     },
   },
-];
+]
 
 export const mockedInvalidAge = [
   {
@@ -500,7 +500,7 @@ export const mockedInvalidAge = [
       state: "SP",
     },
   },
-];
+]
 
 export const mockedInvalidStates = [
   {
@@ -535,4 +535,4 @@ export const mockedInvalidStates = [
       state: "D",
     },
   },
-];
+]

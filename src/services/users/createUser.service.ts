@@ -1,50 +1,50 @@
-import * as bcrypt from "bcrypt";
-import AppDataSource from "../../data-source";
-import Addresses from "../../entities/address.entity";
-import Users from "../../entities/user.entity";
+import * as bcrypt from "bcrypt"
+import AppDataSource from "../../data-source"
+import Addresses from "../../entities/address.entity"
+import Users from "../../entities/user.entity"
 import AppError from "../../Error/AppError"
-import { IUserRequest } from "../../interfaces/user";
+import { IUserRequest } from "../../interfaces/user"
 
 const createUserService = async ({ name, email, age, password, CPF, sex, img, isAdmin, address }: IUserRequest): Promise<Users> => {
-	const userRepository = AppDataSource.getRepository(Users);	
-	
-	const addressRepository = AppDataSource.getRepository(Addresses)	
+  const userRepository = AppDataSource.getRepository(Users)
 
-	const users = await userRepository.find();	
+  const addressRepository = AppDataSource.getRepository(Addresses)
 
-	const emailAlredyExists = users.find((user) => user.email === email);
+  const users = await userRepository.find()
 
-	if (emailAlredyExists) {
-		throw new AppError("Email already exist");
-	}
+  const emailAlredyExists = users.find((user) => user.email === email)
 
-	const cpfAlreadyExists = users.find(user => user.CPF === CPF);
+  if (emailAlredyExists) {
+    throw new AppError("Email already exist")
+  }
 
-	if (cpfAlreadyExists) {
-		throw new AppError("CPF already exists")
-	}
+  const cpfAlreadyExists = users.find((user) => user.CPF === CPF)
 
-	const hashedPassword = await bcrypt.hash(password, 10);
+  if (cpfAlreadyExists) {
+    throw new AppError("CPF already exists")
+  }
 
-	const createdAddress = addressRepository.create(address);
+  const hashedPassword = await bcrypt.hash(password, 10)
 
-	await addressRepository.save(createdAddress);
+  const createdAddress = addressRepository.create(address)
 
-	const user = userRepository.create({
-		name,
-		email,
-		age,
-		password: hashedPassword,
-		CPF,
-		sex,
-		img,
-		isAdmin,
-		address: createdAddress
-	});
+  await addressRepository.save(createdAddress)
 
-	await userRepository.save(user);
+  const user = userRepository.create({
+    name,
+    email,
+    age,
+    password: hashedPassword,
+    CPF,
+    sex,
+    img,
+    isAdmin,
+    address: createdAddress,
+  })
 
-	return user;
-};
+  await userRepository.save(user)
 
-export default createUserService;
+  return user
+}
+
+export default createUserService

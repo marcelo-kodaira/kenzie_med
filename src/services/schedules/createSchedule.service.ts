@@ -4,47 +4,40 @@ import Schedules from "../../entities/schedule.entity"
 import AppError from "../../Error/AppError"
 import { IScheduleRequest } from "../../interfaces/schedule"
 
-const createScheduleService = async ({type, description, doctorsID, hour, date}:IScheduleRequest) => {
-   
-    const scheduleRepository = AppDataSource.getRepository(Schedules)
+const createScheduleService = async ({ type, description, doctorsID, hour, date }: IScheduleRequest) => {
+  const scheduleRepository = AppDataSource.getRepository(Schedules)
 
-    const doctorRepository = AppDataSource.getRepository(Doctors)
+  const doctorRepository = AppDataSource.getRepository(Doctors)
 
-    const doctor = await doctorRepository.findOneBy({
-        id: doctorsID
-    })
+  const doctor = await doctorRepository.findOneBy({
+    id: doctorsID,
+  })
 
-    const scheduleAlreadyExist = await scheduleRepository.findOneBy({
-        type,
-        hour,
-        date     
-    })
- 
-    if(scheduleAlreadyExist){
-        throw new AppError("Schedule already exist!", 400)
-    }
-    
-    if(!doctor){
-        throw new AppError("Doctor not found", 404)
-    }
-    
-        const newSchedule = scheduleRepository.create({
-            type,
-            description,        
-            hour,
-            date,
-            doctor
-       })   
-       
+  const scheduleAlreadyExist = await scheduleRepository.findOneBy({
+    type,
+    hour,
+    date,
+  })
 
-       await scheduleRepository.save(newSchedule)
-    
-       return newSchedule
-    }
+  if (scheduleAlreadyExist) {
+    throw new AppError("Schedule already exist!", 400)
+  }
 
- 
-   
-    
+  if (!doctor) {
+    throw new AppError("Doctor not found", 404)
+  }
 
+  const newSchedule = scheduleRepository.create({
+    type,
+    description,
+    hour,
+    date,
+    doctor,
+  })
+
+  await scheduleRepository.save(newSchedule)
+
+  return newSchedule
+}
 
 export default createScheduleService

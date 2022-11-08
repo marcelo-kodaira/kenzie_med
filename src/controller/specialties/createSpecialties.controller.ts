@@ -1,16 +1,13 @@
-import { Request, Response } from "express";
-import { instanceToPlain } from "class-transformer";
-import { ISpecialtyRequest } from "../../interfaces/specialty";
-import createSpecialtyService from "../../services/specialties/createSpecialties.service";
+import { Request, Response } from "express"
+import { instanceToPlain } from "class-transformer"
+import { ISpecialtyRequest } from "../../interfaces/specialty"
+import createSpecialtyService from "../../services/specialties/createSpecialties.service"
 
+const createSpecialtyController = async (req: Request, res: Response) => {
+  const createspecialty: ISpecialtyRequest = req.body
 
-const createSpecialtyController = async(req: Request, res: Response) => {
+  const newSpecialty = await createSpecialtyService(createspecialty)
 
-    const createspecialty:ISpecialtyRequest = req.body;
-
-    const newSpecialty = await createSpecialtyService(createspecialty);
-
-    return res.status(201).json(instanceToPlain(newSpecialty));
-
-};
+  return res.status(201).json(instanceToPlain(newSpecialty))
+}
 export default createSpecialtyController
