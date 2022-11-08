@@ -1,18 +1,20 @@
 import AppDataSource from "../../data-source";
 import Doctors from "../../entities/doctor.entity";
+import AppError from "../../Error/AppError";
 
-const softDeleteTargetDoctorService = async (id: string ) => {
-    const doctorRepository = AppDataSource.getRepository( Doctors );
+const softDeleteTargetDoctorService = async (id: string) => {
+  const doctorRepository = AppDataSource.getRepository(Doctors);
 
-    const docotrToDelete = await doctorRepository.find();
+  const account = await doctorRepository.findOne({ where: { id } });
+  if (!account) {
+    throw new AppError("Doctor not found", 404);
+  }
 
-    const account = docotrToDelete.find( targetDocotr => targetDocotr.id === id );
+  account!.isActive = false;
 
-    account!.isActive = false;
+  await doctorRepository.save(account!);
 
-    await doctorRepository.save(account!);
-
-    return account;
-}
+  return account;
+};
 
 export default softDeleteTargetDoctorService;

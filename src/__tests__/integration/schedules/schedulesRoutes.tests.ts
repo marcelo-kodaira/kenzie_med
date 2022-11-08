@@ -14,7 +14,7 @@ import {
   mockedLoginDoctor,
 } from "../../mocks/schedules";
 
-describe("/schedules", () => {
+describe("Testing /SCHEDULES routes", () => {
   let connection: DataSource;
 
   beforeAll(async () => {

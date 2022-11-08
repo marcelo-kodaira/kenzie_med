@@ -35,7 +35,7 @@ const mockedInactiveUserLogin: ILogin = {
   password: "abcdefg",
 };
 
-describe("/login", () => {
+describe("Testing /LOGIN/USERS routes", () => {
   let connection: DataSource;
 
   beforeAll(async () => {

@@ -5,7 +5,7 @@ import app from "../../../app";
 import { mockedDoctors } from "../../mocks/doctors";
 import Specialties from "../../../entities/specialty.entity";
 
-describe("/login", () => {
+describe("Testing /LOGIN/DOCTORS routes", () => {
   let connection: DataSource;
 
   beforeAll(async () => {
