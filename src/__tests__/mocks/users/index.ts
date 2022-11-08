@@ -96,7 +96,7 @@ export const mockedUserLogin: ILogin = {
 }
 
 export const mockedUserActiveLogin: ILogin = {
-    email: "danielgalvan@.com",
+    email: "danielgalvan@mail.com",
     password: "123456"
 }
 
@@ -104,3 +104,4 @@ export const mockedAdminLogin: ILogin = {
     email: "daniel2@mail.com",
     password: "123456"
 }
+

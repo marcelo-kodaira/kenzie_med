@@ -46,6 +46,10 @@ class Users{
     @JoinColumn()
     address: Addresses
 
+    // @OneToOne(()=> Addresses, (address) => address.user, {eager: true, cascade: true})
+    // @JoinColumn()
+    // address: Addresses
+
     @OneToMany(()=> Schedules, schedules => schedules.user)
     schedules: Schedules[]
 
