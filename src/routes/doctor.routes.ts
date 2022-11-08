@@ -6,17 +6,31 @@ import listDoctorsController from "../controller/doctors/listDoctors.controller"
 import listTargetDoctorController from "../controller/doctors/listTargetDoctor.controller";
 import patchDoctorsController from "../controller/doctors/patchDoctors.controller";
 import softDeleteController from "../controller/doctors/softDeleteTargetDoctor.controller";
-import auth from "../middlewares/auth.middleware";
+import authMiddleware from "../middlewares/auth.middleware";
 import isOwnerMiddleware from "../middlewares/isOwner.middleware";
 
 const doctorsRoutes = Router();
 
 doctorsRoutes.post("", createDoctorController);
-doctorsRoutes.get("/profile", auth, getProfileDoctorsController);
-doctorsRoutes.get("/:id/schedules", auth, getDoctorSchedulesControllerByID);
+doctorsRoutes.get("/profile", authMiddleware, getProfileDoctorsController);
+doctorsRoutes.get(
+  "/:id/schedules",
+  authMiddleware,
+  getDoctorSchedulesControllerByID
+);
 doctorsRoutes.get("/:id", listTargetDoctorController);
 doctorsRoutes.get("", listDoctorsController);
-doctorsRoutes.patch("/:id", patchDoctorsController);
-doctorsRoutes.delete("/:id", auth, isOwnerMiddleware, softDeleteController);
+doctorsRoutes.patch(
+  "/:id",
+  authMiddleware,
+  isOwnerMiddleware,
+  patchDoctorsController
+);
+doctorsRoutes.delete(
+  "/:id",
+  authMiddleware,
+  isOwnerMiddleware,
+  softDeleteController
+);
 
 export default doctorsRoutes;

@@ -12,7 +12,7 @@ import {
   mockedUserActive,
 } from "../../mocks/users";
 
-describe("/users", () => {
+describe("Testing /USERS routes", () => {
   let connection: DataSource;
 
   beforeAll(async () => {
