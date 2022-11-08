@@ -31,8 +31,8 @@ class Schedules{
     @ManyToOne(()=> Users, {eager: true, nullable: true})
     user?: Users
 
-    @ManyToOne(()=> Doctors, {eager: true})
-    doctor: Doctors
+    @ManyToOne(()=> Doctors, {eager: true , nullable: true})
+    doctor?: Doctors
 
 }
 

@@ -3,9 +3,9 @@ export const mockedDoctors = [
     name: "Mr. Correct One",
     email: "okone@mail.com",
     password: "123456",
-    CRM: "OK 111111",
+    CRM: "OK111111",
     age: 90,
-    speciality: { name: "Cardiologista" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: {
       district: "Street A",
@@ -19,9 +19,9 @@ export const mockedDoctors = [
     name: "Mr. Correct Two",
     email: "oktwo@mail.com",
     password: "123456",
-    CRM: "OK 222222",
+    CRM: "OK222222",
     age: 90,
-    speciality: { name: "Cardiologista" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: {
       district: "Street B",
@@ -35,9 +35,9 @@ export const mockedDoctors = [
     name: "Mr. Correct Three",
     email: "okthree@mail.com",
     password: "123456",
-    CRM: "OK 333333",
+    CRM: "OK333333",
     age: 90,
-    speciality: { name: "Cardiologista" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: {
       district: "Street C",
@@ -55,7 +55,7 @@ interface INulledTest {
   password?: string | null;
   CRM?: string | null;
   age?: number | null | string;
-  speciality?: { name: string | null } | null | string;
+  specialtiesId?: { id: number | null } | null | string;
   sex?: string | null;
   address?:
     | {
@@ -77,7 +77,7 @@ export const mockedNulledProperties: INulledTest[] = [
     password: "123456",
     age: 30,
     CRM: "BA 995577",
-    speciality: { name: "Pneumologista" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: {
       district: "Rua dos Deploys",
@@ -94,7 +94,7 @@ export const mockedNulledProperties: INulledTest[] = [
     password: "123456",
     age: 30,
     CRM: "BA 995577",
-    speciality: { name: "Pneumologista" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: {
       district: "Rua dos Deploys",
@@ -111,7 +111,7 @@ export const mockedNulledProperties: INulledTest[] = [
     password: "",
     age: 30,
     CRM: "BA 995577",
-    speciality: { name: "Pneumologista" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: {
       district: "Rua dos Deploys",
@@ -128,7 +128,7 @@ export const mockedNulledProperties: INulledTest[] = [
     password: "123456",
     age: null,
     CRM: "BA 995577",
-    speciality: { name: "Pneumologista" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: {
       district: "Rua dos Deploys",
@@ -145,7 +145,7 @@ export const mockedNulledProperties: INulledTest[] = [
     password: "123456",
     age: 30,
     CRM: null,
-    speciality: { name: "Pneumologista" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: {
       district: "Rua dos Deploys",
@@ -162,7 +162,7 @@ export const mockedNulledProperties: INulledTest[] = [
     password: "123456",
     age: 30,
     CRM: "BA 995577",
-    speciality: { name: "" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: {
       district: "Rua dos Deploys",
@@ -171,7 +171,7 @@ export const mockedNulledProperties: INulledTest[] = [
       city: "Springtown",
       state: "BA",
     },
-    nulledProp: "speciality.name",
+    nulledProp: "specialtiesId.id",
   },
   {
     name: "James Watson",
@@ -179,7 +179,7 @@ export const mockedNulledProperties: INulledTest[] = [
     password: "123456",
     age: 30,
     CRM: "BA 995577",
-    speciality: "",
+    specialtiesId: "",
     sex: "Masculino",
     address: {
       district: "Rua dos Deploys",
@@ -196,7 +196,7 @@ export const mockedNulledProperties: INulledTest[] = [
     password: "123456",
     age: 30,
     CRM: "BA 995577",
-    speciality: { name: "Pneumologista" },
+    specialtiesId: { id: 1 },
     sex: "",
     address: {
       district: "Rua dos Deploys",
@@ -213,7 +213,7 @@ export const mockedNulledProperties: INulledTest[] = [
     password: "123456",
     age: 30,
     CRM: "BA 995577",
-    speciality: { name: "Pneumologista" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: {
       district: "",
@@ -230,7 +230,7 @@ export const mockedNulledProperties: INulledTest[] = [
     password: "123456",
     age: 30,
     CRM: "BA 995577",
-    speciality: { name: "Pneumologista" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: {
       district: "Rua dos Deploys",
@@ -247,7 +247,7 @@ export const mockedNulledProperties: INulledTest[] = [
     password: "123456",
     age: 30,
     CRM: "BA 995577",
-    speciality: { name: "Pneumologista" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: {
       district: "Rua dos Deploys",
@@ -264,7 +264,7 @@ export const mockedNulledProperties: INulledTest[] = [
     password: "123456",
     age: 30,
     CRM: "BA 995577",
-    speciality: { name: "Pneumologista" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: {
       district: "Rua dos Deploys",
@@ -281,7 +281,7 @@ export const mockedNulledProperties: INulledTest[] = [
     password: "123456",
     age: 30,
     CRM: "BA 995577",
-    speciality: { name: "Pneumologista" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: {
       district: "Rua dos Deploys",
@@ -298,7 +298,7 @@ export const mockedNulledProperties: INulledTest[] = [
     password: "123456",
     age: 30,
     CRM: "BA 995577",
-    speciality: { name: "Pneumologista" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: "",
     nulledProp: "address",
@@ -311,7 +311,7 @@ interface IMissingTest {
   password?: string;
   CRM?: string;
   age?: number;
-  speciality?: { name: string };
+  specialtiesId?: { id: number };
   sex?: string;
   address?: {
     district: string;
@@ -329,7 +329,7 @@ export const mockedMissingProperties: IMissingTest[] = [
     password: "123456",
     CRM: "SE 791234",
     age: 28,
-    speciality: { name: "Cardiologista" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: {
       district: "Rua dos Bugs",
@@ -345,7 +345,7 @@ export const mockedMissingProperties: IMissingTest[] = [
     password: "123456",
     CRM: "SE 791234",
     age: 28,
-    speciality: { name: "Cardiologista" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: {
       district: "Rua dos Bugs",
@@ -361,7 +361,7 @@ export const mockedMissingProperties: IMissingTest[] = [
     email: "chopper@mail.com",
     CRM: "SE 791234",
     age: 28,
-    speciality: { name: "Cardiologista" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: {
       district: "Rua dos Bugs",
@@ -377,7 +377,7 @@ export const mockedMissingProperties: IMissingTest[] = [
     email: "chopper@mail.com",
     password: "123456",
     age: 28,
-    speciality: { name: "Cardiologista" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: {
       district: "Rua dos Bugs",
@@ -393,7 +393,7 @@ export const mockedMissingProperties: IMissingTest[] = [
     email: "chopper@mail.com",
     password: "123456",
     CRM: "SE 791234",
-    speciality: { name: "Cardiologista" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: {
       district: "Rua dos Bugs",
@@ -426,7 +426,7 @@ export const mockedMissingProperties: IMissingTest[] = [
     password: "123456",
     CRM: "SE 791234",
     age: 28,
-    speciality: { name: "Cardiologista" },
+    specialtiesId: { id: 1 },
     missingProp: "address",
   },
 ];
@@ -439,7 +439,7 @@ export const mockedInvalidCrm = [
     password: "123456",
     age: 30,
     CRM: "BA 995577A",
-    speciality: { name: "Pneumologista" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: {
       district: "Rua dos Deploys",
@@ -455,7 +455,7 @@ export const mockedInvalidCrm = [
     password: "123456",
     age: 32,
     CRM: "AL 6712458",
-    speciality: { name: "Imunologista" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: {
       district: "Rua dos Arrays",
@@ -474,7 +474,7 @@ export const mockedInvalidAge = [
     password: "123456",
     age: 0,
     CRM: "MG 125634",
-    speciality: { name: "Ortopedista" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: {
       district: "Firebase Street",
@@ -490,7 +490,7 @@ export const mockedInvalidAge = [
     password: "123456",
     age: 120,
     CRM: "SP 135577",
-    speciality: { name: "Cardiologista" },
+    specialtiesId: { id: 1 },
     sex: "Masculino",
     address: {
       district: "AWS Alley",
@@ -509,7 +509,7 @@ export const mockedInvalidStates = [
     password: "123456",
     age: 16,
     CRM: "DF 999999",
-    speciality: { name: "Cardiologista" },
+    specialtiesId: { id: 1 },
     sex: "Feminino",
     address: {
       district: "Sql Square",
@@ -525,7 +525,7 @@ export const mockedInvalidStates = [
     password: "123456",
     age: 16,
     CRM: "DF 999999",
-    speciality: { name: "Cardiologista" },
+    specialtiesId: { id: 1 },
     sex: "Feminino",
     address: {
       district: "Sql Square",

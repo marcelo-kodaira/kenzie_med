@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn} from "typeorm";
+import Users from "./user.entity";
 
 @Entity('addresses')
 class Addresses{
@@ -19,6 +20,9 @@ class Addresses{
 
     @Column()
     city: string
+
+    // @OneToOne(() => Users, (user) => user.address, {onDelete: "CASCADE"})
+    // user: Users
 
 }
 
