@@ -5,7 +5,7 @@ import AppError from "../../Error/AppError";
 import { IDoctorUpdate } from "../../interfaces/doctor";
 
 const updateUserService = async (
-  { name, email, password, CRM, age, sex, address }: IDoctorUpdate,
+  { name, email, password, age, sex, address }: IDoctorUpdate,
   userId: string
 ) => {
   const userRepository = AppDataSource.getRepository(Doctors);

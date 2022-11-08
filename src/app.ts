@@ -8,7 +8,6 @@ import scheduleRoutes from './routes/schedules.routes'
 import doctorsRoutes from "./routes/doctor.routes";
 import specialtyRoutes from "./routes/specialties.routes";
 
-
 const app = express();
 app.use(express.json());
 
