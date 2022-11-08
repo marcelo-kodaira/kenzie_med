@@ -16,7 +16,6 @@ import {
 import { IDoctor } from "../../../interfaces/doctor/index";
 import * as jwt from "jsonwebtoken";
 
-
 describe("Testing /DOCTORS routes", () => {
   let connection: DataSource;
 
@@ -155,7 +154,7 @@ describe("Testing /DOCTORS routes", () => {
 
   test("GET /doctors/:id - Should not be able to fetch a specific doctor with invalid ID.", async () => {
     const response = await request(app).get(`/doctors/f32f921994f9fqf`);
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(404);
 
     expect(response.body).toHaveProperty("message");
     expect(response.body).not.toHaveProperty("id");
@@ -177,14 +176,10 @@ describe("Testing /DOCTORS routes", () => {
     const loggedDoctor = await doctorsRepository.findOne({
       where: { CRM: mockedDoctors[0].CRM },
     });
-
-    const token = jwt.sign(
-      { crm: loggedDoctor!.CRM, id: loggedDoctor!.id },
-      "secret_key",
-      {
-        expiresIn: "2h",
-      }
-    );
+    const token = jwt.sign({ crm: loggedDoctor!.CRM }, "secret_key", {
+      subject: loggedDoctor!.id,
+      expiresIn: "2h",
+    });
     const response = await request(app)
       .get(`/doctors/profile`)
       .set("Authorization", `Bearer ${token}`);

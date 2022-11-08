@@ -19,7 +19,6 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
       crm: decoded.crm,
       isAdmin: decoded.isAdmin,
     };
-    decoded.crm && console.warn("CRM do doctor", decoded.crm);
     next();
   });
 };
