@@ -12,9 +12,14 @@ const createDoctorService = async ({ name, email, password, CRM, age, sex, speci
   const doctors = await doctorRepository.find()
 
   const emailAlreadyExists = doctors.find((doctor) => doctor.email === email)
+  const crmAlreadyExists = doctors.find(doctor => doctor.CRM === CRM)
 
   if (emailAlreadyExists) {
     throw new AppError("Email already exists")
+  }
+
+  if (crmAlreadyExists) {
+    throw new AppError("CRM already exists")
   }
 
   const specialtyRepository = AppDataSource.getRepository(Specialties)

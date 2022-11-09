@@ -36,9 +36,9 @@ describe("Testing /SPECIALTIES routes", () => {
     expect(response.status).toBe(200)
   })
 
-  test("GET /specialties/:id -  Must be able to list specialties by id", async () => {
+  test("GET /specialties/:id/doctors -  Must be able to list specialties by id", async () => {
     const specialty = await request(app).get("/specialties")
-    const response = await request(app).get(`/specialties/${specialty.body[0].id}`)
+    const response = await request(app).get(`/specialties/${specialty.body[0].id}/doctors`)
 
     expect(response.body).toHaveProperty("id")
     expect(response.body).toHaveProperty("name")
