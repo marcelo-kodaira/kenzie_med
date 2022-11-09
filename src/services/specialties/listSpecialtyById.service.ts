@@ -17,7 +17,7 @@ const listSpecialtyByIdService = async (id: string) => {
   })
 
   if (!findSpecialtyById) {
-    throw new AppError("Target Specialty not found!", 404)
+    throw new AppError("Specialty not found!", 404)
   }
 
   return findSpecialtyById

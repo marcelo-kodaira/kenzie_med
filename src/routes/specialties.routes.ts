@@ -9,6 +9,6 @@ const specialtyRoutes = Router()
 
 specialtyRoutes.post("", createSpecialtyController, authMiddleware, isAdmMiddleware)
 specialtyRoutes.get("", listAllSpecialtyController)
-specialtyRoutes.get("/:id", ListPropertiesController)
+specialtyRoutes.get("/:id/doctors", ListPropertiesController)
 
 export default specialtyRoutes

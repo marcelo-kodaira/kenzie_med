@@ -8,7 +8,7 @@ const verifyUpdateRequestUserMiddleware = (req: Request, res: Response, next: Ne
   const updateRequest = req.body
 
   if (reqUserId !== updateUserId && !isAdmin) {
-    throw new AppError("Unauthorized")
+    throw new AppError("Unauthorized", 401)
   }
 
   if (

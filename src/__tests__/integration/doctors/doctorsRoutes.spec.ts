@@ -301,7 +301,7 @@ describe("Testing /DOCTORS routes", () => {
           [property]: "this is just a dummy",
         })
         .set("Authorization", `Bearer ${token}`)
-      expect(response.status).toBe(200)
+      expect(response.status).toBe(400)
       expect(response.body[property]).not.toBe("this is just a dummy")
     })
   })
