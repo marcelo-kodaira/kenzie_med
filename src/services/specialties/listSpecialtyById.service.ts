@@ -5,8 +5,6 @@ import AppError from "../../Error/AppError"
 const listSpecialtyByIdService = async (id: string) => {
   const specialtyRepository = AppDataSource.getRepository(Specialties)
 
-  const specialty = await specialtyRepository.findOneBy({ id: id })
-
   const findSpecialtyById = await specialtyRepository.findOne({
     where: {
       id,

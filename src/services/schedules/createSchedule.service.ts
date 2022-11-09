@@ -17,6 +17,9 @@ const createScheduleService = async ({ type, description, doctorsID, hour, date 
     type,
     hour,
     date,
+    doctor:{
+      id: doctorsID
+    }
   })
 
   if (scheduleAlreadyExist) {
