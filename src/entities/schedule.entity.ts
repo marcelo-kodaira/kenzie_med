@@ -32,7 +32,7 @@ class Schedules {
   user?: Users
 
   @ManyToOne(() => Doctors, { eager: true, nullable: true })
-  doctor?: Doctors
+  doctor: Doctors
 }
 
 export default Schedules
