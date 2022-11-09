@@ -10,7 +10,11 @@ const loginUserService = async ({ email, password }: ILogin) => {
   const userRepository = AppDataSource.getRepository(Users)
 
   if (!email) {
-    throw new AppError("email is a required information")
+    throw new AppError("Email is a required information")
+  }
+
+  if (!password) {
+    throw new AppError("Password is a required information")
   }
 
   const user = await userRepository.findOneBy({

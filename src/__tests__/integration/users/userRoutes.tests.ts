@@ -243,7 +243,7 @@ describe("Testing /USERS routes", () => {
     const response = await request(app).patch(`/users/${userTobeUpdateId}`).set("Authorization", userToken).send(newValues)
 
     expect(response.body).toHaveProperty("message")
-    expect(response.status).toBe(400)
+    expect(response.status).toBe(401)
   })
 
   test("PATCH /users/:id - Should be able to update user", async () => {

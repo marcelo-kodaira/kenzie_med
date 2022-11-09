@@ -1,7 +1,6 @@
 import updateScheduleService from "../../services/schedules/updateUserSchedule.service"
 import { Request, Response } from "express"
 import { instanceToPlain } from "class-transformer"
-import Schedules from "../../entities/schedule.entity"
 
 const updateScheduleController = async (req: Request, res: Response) => {
   const scheduleID = req.params.id
