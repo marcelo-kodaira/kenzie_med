@@ -242,7 +242,7 @@ describe("Testing /SCHEDULES routes", () => {
 
     const response = await request(app).get("/schedules/users").set("Authorization", `Bearer ${userLoginResponse.body.token}`)
 
-    expect(response.body).toHaveLength(1)
+    expect(response.body).toHaveProperty("message")
   })
 
   test("GET /schedules -  DOCTOR - Should  be able to list or schedules ", async () => {
